@@ -6,6 +6,12 @@ class UserService {
     this.User = db.User;
   }
 
+  async getUserById(email) {
+    return await this.User.findOne({
+      where: { id: id },
+    }).catch((e) => e);
+  }
+
   async getUserByEmail(email) {
     return await this.User.findOne({
       where: { email: email },
@@ -48,6 +54,46 @@ class UserService {
     }).catch((e) => {
       return e;
     });
+  }
+
+  async deleteUser(id) {
+    return await this.User.destroy({
+      where: { id: id },
+    }).catch((e) => e);
+  }
+
+  async updateUser(user) {
+    const {
+      id,
+      firstName,
+      lastName,
+      username,
+      email,
+      address,
+      telephone,
+      itemPurchased,
+      MembershipId,
+      RoleId,
+    } = user;
+
+    return await this.User.update(
+      {
+        firstName,
+        lastName,
+        username,
+        email,
+        address,
+        telephone,
+        itemPurchased,
+        MembershipId,
+        RoleId,
+      },
+      {
+        where: { id: id },
+        returning: true,
+        plain: true,
+      }
+    ).catch((e) => e);
   }
 }
 
