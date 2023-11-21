@@ -31,7 +31,9 @@ class UserService {
       telephone,
       MembershipId,
       RoleId,
-    }).catch((e) => e);
+    }).catch((e) => {
+      return e;
+    });
   }
 }
 

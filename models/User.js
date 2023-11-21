@@ -40,6 +40,10 @@ module.exports = (sequelize, Sequelize) => {
       telephone: {
         type: Sequelize.DataTypes.STRING,
       },
+      itemsPurchased: {
+        type: Sequelize.DataTypes.INTEGER,
+        defaultValue: 0,
+      },
     },
     {
       timestamps: true,
