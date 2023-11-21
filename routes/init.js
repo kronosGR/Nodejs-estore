@@ -8,6 +8,7 @@ const MembershipService = require('../services/Membership');
 const BrandService = require('../services/BrandService');
 const CategoryService = require('../services/CategoryService');
 const ProductService = require('../services/ProductService');
+const OrderStatusService = require('../services/OrderStatusService');
 
 const router = express.Router();
 const db = require('../models');
@@ -18,7 +19,7 @@ const membershipService = new MembershipService(db);
 const brandService = new BrandService(db);
 const categoryService = new CategoryService(db);
 const productService = new ProductService(db);
-
+const orderStatusService = new OrderStatusService(db);
 router.post('/', async function (req, res, next) {
   try {
     // Populate roles table
@@ -42,6 +43,11 @@ router.post('/', async function (req, res, next) {
       '3',
       '1'
     );
+
+    //add orderStatuses
+    await orderStatusService.addOrderStatus('In Progress');
+    await orderStatusService.addOrderStatus('Ordered');
+    await orderStatusService.addOrderStatus('Completed');
 
     //add Brands
     await brandService.addBrand('Apple');
