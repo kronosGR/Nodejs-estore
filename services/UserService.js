@@ -6,6 +6,20 @@ class UserService {
     this.User = db.User;
   }
 
+  async getUserByEmail(email) {
+    return await this.User.findOne({
+      where: { email: email },
+    }).catch((e) => e);
+  }
+
+  async getUserByUsername(username) {
+    return await this.User.findOne({
+      where: {
+        username: username,
+      },
+    }).catch((e) => e);
+  }
+
   async addUser(
     firstName,
     lastName,
