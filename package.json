@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "bootstrap": "^5.3.2",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^16.3.1",
@@ -28,6 +29,7 @@
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
+    "@types/bootstrap": "^5.2.9",
     "@types/cookie-parser": "^1.4.6",
     "@types/debug": "^4.1.12",
     "@types/dotenv": "^8.2.0",

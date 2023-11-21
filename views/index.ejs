@@ -1,11 +1,27 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+
+<head>
+  <title><%= title %></title>
+  <%- include('./partials/head.ejs') %>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body class="d-flex justify-content-center align-items-center">
+  <div class="bg-black w-50 p-4">
+    <form class="text-white d-block  ">
+      <div class="mb-3">
+        <label for="email" class="form-label">Email/Usename</label>
+        <input type="text" class="form-control " id="email">
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control " id="password">
+      </div>
+      <button type="submit" class="btn btn-primary w-100 ">Login</button>
+    </form>
+  </div>
+</body>
+
 </html>

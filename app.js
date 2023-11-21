@@ -10,6 +10,7 @@ const db = require('./models');
 
 const initRouter = require('./routes/init');
 const authRouter = require('./routes/auth');
+const indexRouter = require('./routes/index');
 
 var app = express();
 
@@ -25,7 +26,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(__dirname + '/node_modules/bootstrap/dist'));
+app.use(express.static(__dirname + '/node_modules/jquery/dist/'));
 
+app.use('/', indexRouter);
 app.use('/init', initRouter);
 app.use('/auth', authRouter);
 
