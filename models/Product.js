@@ -29,7 +29,6 @@ module.exports = (sequelize, Sequelize) => {
   Product.associate = function (models) {
     Product.belongsTo(models.Category, { foreignKey: { allowNull: false } });
     Product.belongsTo(models.Brand, { foreignKey: { allowNull: false } });
-    Product.belongsTo(models.User, { foreignKey: { allowNull: false } });
   };
 
   return Product;

@@ -29,8 +29,8 @@ class UserService {
       salt,
       address,
       telephone,
-      MembershipId: 3,
-      RoleId: 1,
+      MembershipId,
+      RoleId,
     }).catch((e) => e);
   }
 }
