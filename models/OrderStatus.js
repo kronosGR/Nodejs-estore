@@ -1,12 +1,7 @@
 module.exports = (sequelize, Sequelize) => {
-  const OrderStatus = sequelize.defile(
+  const OrderStatus = sequelize.define(
     'OrderStatus',
     {
-      id: {
-        type: Sequelize.DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true,
-      },
       name: {
         type: Sequelize.DataTypes.STRING,
         unique: {
@@ -22,7 +17,7 @@ module.exports = (sequelize, Sequelize) => {
   );
 
   OrderStatus.associate = function (models) {
-    OrderStatus.belongsTo(models.Order, { foreignKey: { allowNull: false } });
+    OrderStatus.hasOne(models.Order, { foreignKey: { allowNull: false } });
   };
 
   return OrderStatus;

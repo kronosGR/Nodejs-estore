@@ -1,10 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
   const Product = sequelize.define('Product', {
-    id: {
-      type: Sequelize.DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-    },
     name: {
       type: Sequelize.DataTypes.STRING,
       allowNull: false,
@@ -32,9 +27,9 @@ module.exports = (sequelize, Sequelize) => {
   });
 
   Product.associate = function (models) {
-    Product.hasOne(models.Category, { foreignKey: { allowNull: false } });
-    Product.hasOne(models.Brand, { foreignKey: { allowNull: false } });
-    Product.belongsToMany(model.User, { foreignKey: { allowNull: false } });
+    Product.belongsTo(models.Category, { foreignKey: { allowNull: false } });
+    Product.belongsTo(models.Brand, { foreignKey: { allowNull: false } });
+    Product.belongsTo(models.User, { foreignKey: { allowNull: false } });
   };
 
   return Product;

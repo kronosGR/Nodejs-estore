@@ -1,17 +1,12 @@
 module.exports = (sequelize, Sequelize) => {
-  const Order = define('Order', {
-    id: {
-      type: Sequelize.DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-    },
+  const Order = sequelize.define('Order', {
     total: Sequelize.DataTypes.FLOAT,
   });
 
   Order.associate = function (models) {
-    Order.hasMany(models.OderItem, { foreignKey: { allowNull: false } });
-    Order.hasOne(models.OrderStatus, { foreignKey: { allowNull: false } });
-    Order.belongTo(models.User, { foreignKey: { allowNull: false } });
+    Order.hasMany(models.OrderItem, { foreignKey: { allowNull: false } });
+    Order.belongsTo(models.OrderStatus, { foreignKey: { allowNull: false } });
+    Order.belongsTo(models.User, { foreignKey: { allowNull: false } });
   };
 
   return Order;

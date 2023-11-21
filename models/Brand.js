@@ -2,11 +2,6 @@ module.exports = (sequelize, Sequelize) => {
   const Brand = sequelize.define(
     'Brand',
     {
-      id: {
-        type: Sequelize.DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true,
-      },
       name: {
         type: Sequelize.DataTypes.STRING,
         unique: {
@@ -22,7 +17,7 @@ module.exports = (sequelize, Sequelize) => {
   );
 
   Brand.associate = function (models) {
-    Brand.belongsTo(models.Product, { foreignKey: { allowNull: false } });
+    Brand.hasOne(models.Product, { foreignKey: { allowNull: false } });
   };
   return Brand;
 };

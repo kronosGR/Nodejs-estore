@@ -2,11 +2,6 @@ module.exports = (sequelize, Sequelize) => {
   const User = sequelize.define(
     'User',
     {
-      id: {
-        type: Sequelize.DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true,
-      },
       firstName: {
         type: Sequelize.DataTypes.STRING,
         allowNull: false,
@@ -54,8 +49,8 @@ module.exports = (sequelize, Sequelize) => {
   User.associate = function (models) {
     User.hasMany(models.Order, { foreignKey: { allowNull: false } });
     User.hasMany(models.Cart, { foreignKey: { allowNull: false } });
-    User.hasOne(models.Role, { foreignKey: { allowNull: false } });
-    User.hasOne(models.Membership, { foreignKey: { allowNull: false } });
+    User.belongsTo(models.Role, { foreignKey: { allowNull: false } });
+    User.belongsTo(models.Membership, { foreignKey: { allowNull: false } });
   };
 
   return User;

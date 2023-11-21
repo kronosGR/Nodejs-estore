@@ -2,11 +2,6 @@ module.exports = (sequelize, Sequelize) => {
   const Role = sequelize.define(
     'Role',
     {
-      id: {
-        type: Sequelize.DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true,
-      },
       name: {
         type: Sequelize.DataTypes.STRING,
         unique: {
@@ -22,7 +17,7 @@ module.exports = (sequelize, Sequelize) => {
   );
 
   Role.associate = function (models) {
-    Role.belongsTo(models.User, { foreignKey: { allowNull: false } });
+    Role.hasOne(models.User, { foreignKey: { allowNull: false } });
   };
 
   return Role;

@@ -2,11 +2,6 @@ module.exports = (sequelize, Sequelize) => {
   const Membership = sequelize.define(
     'Membership',
     {
-      id: {
-        type: Sequelize.DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true,
-      },
       name: {
         type: Sequelize.DataTypes.STRING,
         unique: {
@@ -24,7 +19,7 @@ module.exports = (sequelize, Sequelize) => {
   );
 
   Membership.associate = function (models) {
-    Membership.belongsTo(models.User, { foreignKey: { allowNull: false } });
+    Membership.hasOne(models.User, { foreignKey: { allowNull: false } });
   };
 
   return Membership;

@@ -2,6 +2,7 @@ module.exports = (sequelize, Sequelize) => {
   const OrderItem = sequelize.define(
     'OrderItem',
     {
+      productId: Sequelize.INTEGER,
       quantity: Sequelize.DataTypes.INTEGER,
       unitPrice: Sequelize.DataTypes.FLOAT,
     },
