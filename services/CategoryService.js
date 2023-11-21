@@ -16,6 +16,35 @@ class CategoryService {
       type: this.sequelize.QueryTypes.SELECT,
     });
   }
+
+  async getAllCategories() {
+    return await this.Category.findAll();
+  }
+
+  async getCategory(id) {
+    return await this.Category.findOne({
+      where: { id: id },
+    }).catch((e) => e);
+  }
+
+  async deleteCategory(id) {
+    return await this.Category.destroy({
+      where: { id: id },
+    }).catch((e) => e);
+  }
+
+  async updateCategory(id, name) {
+    return await this.Category.update(
+      {
+        name: name,
+      },
+      {
+        where: { id: id },
+        returning: true,
+        plain: true,
+      }
+    ).catch((e) => e);
+  }
 }
 
 module.exports = CategoryService;
