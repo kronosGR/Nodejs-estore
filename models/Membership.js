@@ -8,10 +8,10 @@ module.exports = (sequelize, Sequelize) => {
           args: 'name',
           msg: 'membership already exists',
         },
-        from: Sequelize.DataTypes.INTEGER,
-        to: Sequelize.DataTypes.INTEGER,
-        discount: Sequelize.DataTypes.INTEGER,
       },
+      from: Sequelize.DataTypes.INTEGER,
+      to: Sequelize.DataTypes.INTEGER,
+      discount: Sequelize.DataTypes.INTEGER,
     },
     {
       timestamps: true,
