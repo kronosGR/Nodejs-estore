@@ -4,12 +4,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%- include('./partials/head.ejs') %>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title><%= title %></title>
 </head>
 
 <body>
+  <div class="container-fluid mt-5 text-center">
 
+    <%- include('./partials/navbar.ejs') %>
+  </div>
+  <%- include('./partials/scripts-admin.ejs') %>
 </body>
 
 </html>

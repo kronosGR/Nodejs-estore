@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const jsend = require('jsend');
 const bodyParser = require('body-parser');
+require('dotenv').config();
 
 const db = require('./models');
 
