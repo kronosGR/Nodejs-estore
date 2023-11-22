@@ -51,7 +51,7 @@ router.post('/login', async (req, res, next) => {
     console.error(err);
     return next(createHttpError(500, 'Something went wrong with JWT token creation'));
   }
-  res.jsend.success({ result: 'You are logged in', token: token });
+  return res.jsend.success({ result: 'You are logged in', token: token });
 });
 
 router.post('/register', isValidEmail, async (req, res, next) => {

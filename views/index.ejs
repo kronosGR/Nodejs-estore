@@ -10,7 +10,7 @@
 
 <body class="d-flex justify-content-center align-items-center">
   <div class="bg-black w-50 p-4">
-    <form class="text-white d-block  ">
+    <form class="text-white d-block" id="login-form" method="POST">
       <div class="mb-3">
         <label for="email" class="form-label">Email/Usename</label>
         <input type="text" class="form-control " id="email">
@@ -22,6 +22,9 @@
       <button type="submit" class="btn btn-primary w-100 ">Login</button>
     </form>
   </div>
+  <%- include('partials/notification.ejs') %>
+  <%- include('partials/scripts.ejs') %>
+  <script src="/javascript/login.js"></script>
 </body>
 
 </html>

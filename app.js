@@ -11,6 +11,7 @@ const db = require('./models');
 const initRouter = require('./routes/init');
 const authRouter = require('./routes/auth');
 const indexRouter = require('./routes/index');
+const adminRouter = require('./routes/admin');
 
 var app = express();
 
@@ -32,6 +33,7 @@ app.use(express.static(__dirname + '/node_modules/jquery/dist/'));
 app.use('/', indexRouter);
 app.use('/init', initRouter);
 app.use('/auth', authRouter);
+app.use('/admin', adminRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -44,6 +46,7 @@ app.use(function (err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
+  console.log(err);
   // render the error page
   res.status(err.status || 500);
   res.json(jsend.fail({ statusCode: err.status, data: err.message }));
