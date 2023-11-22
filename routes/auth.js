@@ -41,16 +41,25 @@ router.post('/login', async (req, res, next) => {
   let token;
   try {
     token = jwt.sign(
-      { id: userData.id, email: userData.email, username: userData.username },
+      {
+        id: userData.id,
+        email: userData.email,
+        username: userData.username,
+        RoleId: userData.RoleId,
+      },
       process.env.TOKEN_SECRET,
       {
         expiresIn: '2h',
       }
     );
   } catch (err) {
-    console.error(err);
     return next(createHttpError(500, 'Something went wrong with JWT token creation'));
   }
+  res.cookie('token', token, {
+    maxAge: 2 * 60 * 60 * 1000,
+    secure: false,
+    httpOnly: true,
+  });
   return res.jsend.success({ result: 'You are logged in', token: token });
 });
 

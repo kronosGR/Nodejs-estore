@@ -7,6 +7,8 @@ const jsend = require('jsend');
 const bodyParser = require('body-parser');
 require('dotenv').config();
 
+const isAdmin = require('./middleware/isAdmin');
+
 const db = require('./models');
 
 const initRouter = require('./routes/init');
@@ -34,7 +36,7 @@ app.use(express.static(__dirname + '/node_modules/jquery/dist/'));
 app.use('/', indexRouter);
 app.use('/init', initRouter);
 app.use('/auth', authRouter);
-app.use('/admin', adminRouter);
+app.use('/admin', isAdmin, adminRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

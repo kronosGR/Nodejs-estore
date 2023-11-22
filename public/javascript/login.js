@@ -16,11 +16,7 @@ $(document).ready(function () {
       contentType: 'Application/json',
       dataType: 'json',
       success: function (result) {
-        sessionStorage.setItem('token', result.data.token);
-        const token = sessionStorage.getItem('token');
-        if (token) {
-          window.location.href = `${API_URL}/admin`;
-        }
+        window.location.href = `${API_URL}/admin`;
       },
       error: function (err) {
         console.log(err);
