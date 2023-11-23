@@ -15,3 +15,14 @@ function hideSpinner() {
 function showSpinner() {
   $('#spinner').show();
 }
+
+function emptyContainer(selector) {
+  $(selector).empty();
+}
+
+function hideModal(selector) {
+  $(selector).modal('hide');
+}
+function showModal(selector) {
+  $(selector).modal('show');
+}
