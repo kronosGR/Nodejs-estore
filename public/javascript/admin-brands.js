@@ -17,7 +17,6 @@ async function brandDelete(id) {
     },
     error: function (err) {
       hideSpinner();
-      console.error(err);
       showToast('Error', err.responseJSON.data.data);
     },
   });
@@ -42,9 +41,9 @@ async function getBrands() {
               ${brand.name}
             </div>
             <div class="col py-1 bg-light ">
-              <button id="brand-delete" class="btn-sm btn-warning" onclick="brandDelete(${brand.id})"><i
+              <button id="brand-delete" class="btn btn-warning" onclick="brandDelete(${brand.id})"><i
                   class="bi bi-trash"></i></button>
-              <button id="brand-edit " class=" btn-sm btn-danger" onclick="showUpdateForm(${brand.id},'${brand.name}')"><i class="bi bi-pencil"></i></button>
+              <button id="brand-edit " class=" btn btn-danger" onclick="showUpdateForm(${brand.id},'${brand.name}')"><i class="bi bi-pencil"></i></button>
             </div>
           </div>
         `;

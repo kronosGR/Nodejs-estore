@@ -15,7 +15,10 @@ router.get('/', async (req, res, next) => {
 router.delete('/:brandId', isAdmin, async (req, res, next) => {
   const brandId = req.params.brandId;
   try {
-    await brandService.deleteBrand(brandId);
+    const res = await brandService.deleteBrand(brandId);
+    if (res.name == 'SequelizeForeignKeyConstraintError') {
+      return next(createHttpError(500, 'The brand is being used'));
+    }
   } catch (e) {
     return next(createHttpError(500, 'There was an error deleting the brand'));
   }

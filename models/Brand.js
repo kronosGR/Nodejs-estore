@@ -17,7 +17,11 @@ module.exports = (sequelize, Sequelize) => {
   );
 
   Brand.associate = function (models) {
-    Brand.hasOne(models.Product, { foreignKey: { allowNull: false } });
+    Brand.hasOne(models.Product, {
+      foreignKey: { allowNull: false },
+      onDelete: 'RESTRICT',
+      onUpdate: 'RESTRICT',
+    });
   };
   return Brand;
 };
