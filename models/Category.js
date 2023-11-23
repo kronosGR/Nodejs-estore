@@ -17,7 +17,10 @@ module.exports = (sequelize, Sequelize) => {
   );
 
   Category.associate = function (models) {
-    Category.hasOne(models.Product, { foreignKey: { allowNull: false } });
+    Category.hasOne(models.Product, {
+      foreignKey: { allowNull: false },
+      onDelete: 'RESTRICT',
+    });
   };
 
   return Category;

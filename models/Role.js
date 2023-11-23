@@ -17,7 +17,7 @@ module.exports = (sequelize, Sequelize) => {
   );
 
   Role.associate = function (models) {
-    Role.hasOne(models.User, { foreignKey: { allowNull: false } });
+    Role.hasOne(models.User, { foreignKey: { allowNull: false }, onDelete: 'RESTRICT' });
   };
 
   return Role;

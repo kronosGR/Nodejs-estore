@@ -20,7 +20,6 @@ module.exports = (sequelize, Sequelize) => {
     Brand.hasOne(models.Product, {
       foreignKey: { allowNull: false },
       onDelete: 'RESTRICT',
-      onUpdate: 'RESTRICT',
     });
   };
   return Brand;

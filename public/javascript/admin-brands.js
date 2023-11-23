@@ -150,7 +150,6 @@ function showAddBrandForm() {
 async function brandAdd() {
   showSpinner();
   const name = $('#new-brand-name').val();
-  console.log(name.length);
   const data = JSON.stringify({ name: name });
 
   $.ajax({

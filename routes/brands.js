@@ -1,9 +1,10 @@
 const express = require('express');
-const db = require('../models');
-const BrandService = require('../services/BrandService');
-const isAdmin = require('../middleware/isAdmin');
 const createHttpError = require('http-errors');
 
+const BrandService = require('../services/BrandService');
+const isAdmin = require('../middleware/isAdmin');
+
+const db = require('../models');
 const brandService = new BrandService(db);
 const router = express.Router();
 
