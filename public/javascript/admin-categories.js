@@ -1,19 +1,19 @@
 $(document).ready(async function () {
-  await getBrands();
+  await getCategories();
 });
 
-async function brandDelete(id) {
+async function categoryDelete(id) {
   showSpinner();
   $.ajax({
     type: 'DELETE',
-    url: API_BRAND_URL + `/${id}`,
+    url: API_CATEGORY_URL + `/${id}`,
     contentType: 'Application/json',
     dataType: 'json',
     success: function (result) {
       hideSpinner();
-      emptyContainer('#brand-container');
-      showToast('Success', 'Brand deleted!');
-      getBrands();
+      emptyContainer('#category-container');
+      showToast('Success', 'Category deleted!');
+      getCategories();
     },
     error: function (err) {
       hideSpinner();
@@ -22,32 +22,32 @@ async function brandDelete(id) {
   });
 }
 
-async function getBrands() {
+async function getCategories() {
   showSpinner();
   $.ajax({
     type: 'GET',
-    url: API_BRAND_URL,
+    url: API_CATEGORY_URL,
     contentType: 'Application/json',
     dataType: 'json',
     success: function (result) {
-      const brands = result.data.data.result;
-      brands.forEach((brand) => {
+      const categories = result.data.data.result;
+      categories.forEach((category) => {
         const row = `
          <div class="row px-3 py-1 w-100">
             <div class="col py-1 bg-light">
-              ${brand.id}
+              ${category.id}
             </div>
             <div class="col py-1 bg-light">
-              ${brand.name}
+              ${category.name}
             </div>
             <div class="col py-1 bg-light ">
-              <button id="brand-delete" class="btn btn-warning" onclick="brandDelete(${brand.id})"><i
+              <button id="brand-delete" class="btn btn-warning" onclick="categoryDelete(${category.id})"><i
                   class="bi bi-trash"></i></button>
-              <button id="brand-edit " class=" btn btn-danger" onclick="showUpdateForm(${brand.id},'${brand.name}')"><i class="bi bi-pencil"></i></button>
+              <button id="brand-edit " class=" btn btn-danger" onclick="showUpdateForm(${category.id},'${category.name}')"><i class="bi bi-pencil"></i></button>
             </div>
           </div>
         `;
-        $('#brand-container').append(row);
+        $('#category-container').append(row);
       });
       hideSpinner();
     },
@@ -59,25 +59,25 @@ async function getBrands() {
   });
 }
 
-async function brandUpdate(id, name) {
+async function categoryUpdate(id, name) {
   showSpinner();
-  const newName = $('#brand-name').val();
+  const newName = $('#category-name').val();
   const data = JSON.stringify({
     name: newName,
   });
 
   $.ajax({
     type: 'PUT',
-    url: API_BRAND_URL + `/${id}`,
+    url: API_CATEGORY_URL + `/${id}`,
     data: data,
     contentType: 'Application/json',
     dataType: 'json',
     success: function (result) {
       hideSpinner();
       hideModal('#modal-update');
-      emptyContainer('#brand-container');
-      showToast('Success', 'Brand updated');
-      getBrands();
+      emptyContainer('#category-container');
+      showToast('Success', 'Category updated');
+      getCategories();
     },
     error: function (err) {
       hideSpinner();
@@ -93,7 +93,7 @@ function showUpdateForm(id, name) {
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Edit Brand</h5>
+          <h5 class="modal-title">Edit Category</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"  onclick='hideModal("#modal-update")'>
             <span aria-hidden="true">&times;</span>
           </button>
@@ -101,11 +101,11 @@ function showUpdateForm(id, name) {
         <div class="modal-body">
         <div class="mb-3">
           <label for="name" class="form-label">Name</label>
-          <input type="text" class="form-control " id="brand-name" value='${name}'>
+          <input type="text" class="form-control " id="category-name" value='${name}'>
         </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" onclick ="brandUpdate(${id},'${name}')" >Update</button>
+          <button type="button" class="btn btn-primary" onclick ="categoryUpdate(${id},'${name}')" >Update</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick='hideModal("#modal-update")'>Close</button>
         </div>
       </div>
@@ -113,17 +113,17 @@ function showUpdateForm(id, name) {
   </div>
 `;
 
-  $('#brand-container').append(modalUpdate);
+  $('#category-container').append(modalUpdate);
   showModal('#modal-update');
 }
 
-function showAddBrandForm() {
+function showAddCategoryForm() {
   const modalAdd = `
     <div class="modal" tabindex="-1" role="dialog" id="modal-add">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Add Brand</h5>
+          <h5 class="modal-title">Add Category</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"  onclick='hideModal("#modal-add")'>
             <span aria-hidden="true">&times;</span>
           </button>
@@ -131,11 +131,11 @@ function showAddBrandForm() {
         <div class="modal-body">
         <div class="mb-3">
           <label for="name" class="form-label">Name</label>
-          <input type="text" class="form-control " id="new-brand-name" >
+          <input type="text" class="form-control " id="new-category-name" >
         </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" onclick ="brandAdd()" >Add</button>
+          <button type="button" class="btn btn-primary" onclick ="categoryAdd()" >Add</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick='hideModal("#modal-add")'>Close</button>
         </div>
       </div>
@@ -143,27 +143,28 @@ function showAddBrandForm() {
   </div>
 `;
 
-  $('#brand-container').append(modalAdd);
+  $('#category-container').append(modalAdd);
   showModal('#modal-add');
 }
 
-async function brandAdd() {
+async function categoryAdd() {
   showSpinner();
-  const name = $('#new-brand-name').val();
+  const name = $('#new-category-name').val();
+  console.log(name.length);
   const data = JSON.stringify({ name: name });
 
   $.ajax({
     type: 'POST',
-    url: API_BRAND_URL,
+    url: API_CATEGORY_URL,
     data: data,
     contentType: 'Application/json',
     dataType: 'json',
     success: function (result) {
       hideSpinner();
       hideModal('#modal-add');
-      emptyContainer('#brand-container');
-      showToast('Success', 'Brand Added');
-      getBrands();
+      emptyContainer('#category-container');
+      showToast('Success', 'Category Added');
+      getCategories();
     },
     error: function (err) {
       hideSpinner();
