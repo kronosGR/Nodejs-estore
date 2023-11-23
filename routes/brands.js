@@ -27,11 +27,12 @@ router.delete('/:brandId', isAdmin, async (req, res, next) => {
 
 router.post('/', isAdmin, async (req, res, next) => {
   const { name } = req.body;
-  if (name == null) return next(createHttpError(400, 'Name is required'));
+  if (name == null || name.length == 0)
+    return next(createHttpError(400, 'Name is required'));
 
   const ret = await brandService.addBrand(name);
   if (ret.errors) {
-    const errorMsg = r.errors[0].message;
+    const errorMsg = ret.errors[0].message;
     console.error(errorMsg);
     return next(createHttpError(500, errorMsg));
   }
@@ -41,7 +42,8 @@ router.post('/', isAdmin, async (req, res, next) => {
 router.put('/:brandId', isAdmin, async (req, res, next) => {
   const brandId = req.params.brandId;
   const { name } = req.body;
-  if (name == null) return next(createHttpError(400, 'Name is required'));
+  if (name == null || name.length == 0)
+    return next(createHttpError(400, 'Name is required'));
 
   const ret = await brandService.updateBrand(brandId, name);
   if (ret.errors) {

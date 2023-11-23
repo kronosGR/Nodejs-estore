@@ -76,12 +76,12 @@ async function brandUpdate(id, name) {
       hideSpinner();
       hideModal('#modal-update');
       emptyContainer('#brand-container');
+      showToast('Success', 'Brand updated');
       getBrands();
     },
     error: function (err) {
       hideSpinner();
       hideModal('#modal-update');
-      console.error(err);
       showToast('Error', err.responseJSON.data.data);
     },
   });
@@ -115,4 +115,61 @@ function showUpdateForm(id, name) {
 
   $('#brand-container').append(modalUpdate);
   showModal('#modal-update');
+}
+
+function showAddBrandForm() {
+  const modalAdd = `
+    <div class="modal" tabindex="-1" role="dialog" id="modal-add">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add Brand</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"  onclick='hideModal("#modal-update")'>
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input type="text" class="form-control " id="new-brand-name" >
+        </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" onclick ="brandAdd()" >Add</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick='hideModal("#modal-add")'>Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+`;
+
+  $('#brand-container').append(modalAdd);
+  showModal('#modal-add');
+}
+
+async function brandAdd() {
+  showSpinner();
+  const name = $('#new-brand-name').val();
+  console.log(name.length);
+  const data = JSON.stringify({ name: name });
+
+  $.ajax({
+    type: 'POST',
+    url: API_BRAND_URL,
+    data: data,
+    contentType: 'Application/json',
+    dataType: 'json',
+    success: function (result) {
+      hideSpinner();
+      hideModal('#modal-add');
+      emptyContainer('#brand-container');
+      showToast('Success', 'Brand Added');
+      getBrands();
+    },
+    error: function (err) {
+      hideSpinner();
+      hideModal('#modal-add');
+      showToast('Error', err.responseJSON.data.data);
+    },
+  });
 }
