@@ -1,10 +1,6 @@
 const express = require('express');
 
-const db = require('../models');
-const BrandService = require('../services/BrandService');
-
 const router = express.Router();
-const brandService = new BrandService(db);
 
 router.get('/', async (req, res, next) => {
   console.log(req.cookies.token);
@@ -12,7 +8,7 @@ router.get('/', async (req, res, next) => {
 });
 
 router.get('/brands', async (req, res, next) => {
-  console.log(req.body);
+  res.render('admin-brands');
 });
 
 router.get('/logout', (req, res, next) => {

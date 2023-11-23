@@ -5,7 +5,6 @@ require('dotenv').config();
 
 function isAdmin(req, res, next) {
   const token = req.cookies.token || '';
-  console.log(token);
   try {
     if (!token) return res.redirect('/');
     const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);

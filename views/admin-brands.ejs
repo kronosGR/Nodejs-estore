@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%- include('./partials/head.ejs') %>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Brands</title>
+</head>
+
+<body>
+  <div class="container-fluid mt-5 text-center p-2">
+    <%- include('./partials/navbar.ejs') %>
+
+    <div class="container-fluid mt-5 bg-white">
+      <h2 class="p-3 text-center">Brands</h2>
+      <div class="list-group" id="brand-container">
+        <div class="row px-3 py-1 w-100">
+          <div class="col py-1 ">Id</div>
+          <div class="col py-1 ">Name</div>
+          <div class="col py-1 ">Options</div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  <%- include('partials/extras.ejs') %>
+  <%- include('./partials/scripts.ejs') %>
+  <script src="/javascript/admin-brands.js"></script>
+</body>
+
+</html>
