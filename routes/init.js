@@ -4,7 +4,7 @@ require('dotenv').config();
 
 const RoleService = require('../services/RoleService');
 const UserService = require('../services/UserService');
-const MembershipService = require('../services/Membership');
+const MembershipService = require('../services/MembershipService');
 const BrandService = require('../services/BrandService');
 const CategoryService = require('../services/CategoryService');
 const ProductService = require('../services/ProductService');

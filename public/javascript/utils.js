@@ -1,8 +1,10 @@
 const API_URL = 'http://localhost:3000';
 const API_LOGIN_URL = API_URL + '/auth/login';
 const API_BRAND_URL = API_URL + '/brands';
+const API_MEMBERSHIP_URL = API_URL + '/memberships';
 const API_CATEGORY_URL = API_URL + '/categories';
 const API_ROLE_URL = API_URL + '/roles';
+const API_USERS_URL = API_URL + '/users';
 
 function showToast(title, message) {
   $('#toast-title').text(title);
@@ -25,6 +27,20 @@ function emptyContainer(selector) {
 function hideModal(selector) {
   $(selector).modal('hide');
 }
+
 function showModal(selector) {
   $(selector).modal('show');
+}
+
+function getColorClassForRole(role) {
+  switch (role) {
+    case 'bronze':
+      return 'bronze';
+    case 'silver':
+      return 'silver';
+    case 'gold':
+      return 'gold';
+    default:
+      return 'bronze';
+  }
 }

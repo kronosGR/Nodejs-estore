@@ -18,7 +18,8 @@ const adminRouter = require('./routes/admin');
 const brandsRouter = require('./routes/brands');
 const categoriesRouter = require('./routes/categories');
 const rolesRouter = require('./routes/roles');
-const users = require('./routes/users');
+const usersRouter = require('./routes/users');
+const membershipsRouter = require('./routes/memberships');
 
 var app = express();
 
@@ -44,7 +45,8 @@ app.use('/admin', isAdmin, adminRouter);
 app.use('/brands', brandsRouter);
 app.use('/categories', categoriesRouter);
 app.use('/roles', rolesRouter);
-app.use('/users', users);
+app.use('/users', usersRouter);
+app.use('/memberships', membershipsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

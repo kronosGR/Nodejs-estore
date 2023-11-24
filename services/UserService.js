@@ -4,6 +4,12 @@ const crypto = require('crypto');
 class UserService {
   constructor(db) {
     this.User = db.User;
+    this.Role = db.Role;
+    this.Membership = db.Membership;
+  }
+
+  async getUsers() {
+    return await this.User.findAll({ include: [this.Role, this.Membership] });
   }
 
   async getUserById(email) {

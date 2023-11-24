@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  hideSpinner();
   $('#login-form').on('click', function (e) {
     e.preventDefault();
     const email = $('#email').val();

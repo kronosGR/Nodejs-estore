@@ -11,3 +11,18 @@ a {
 .height-50 {
   height: 50px;
 }
+
+.silver {
+  background-color: #c0c0c0 !important;
+  color: white;
+}
+
+.bronze {
+  background-color: #cd7f32 !important;
+  color: white;
+}
+
+.gold {
+  background-color: #ffd700 !important;
+  color: white;
+}
