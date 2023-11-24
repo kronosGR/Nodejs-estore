@@ -18,6 +18,10 @@ router.get('/roles', (req, res, next) => {
   res.render('admin-roles');
 });
 
+router.get('/users', (req, res, next) => {
+  res.render('admin-users');
+});
+
 router.get('/logout', (req, res, next) => {
   res.clearCookie('token');
   res.redirect('/');

@@ -19,7 +19,10 @@ module.exports = (sequelize, Sequelize) => {
   );
 
   Membership.associate = function (models) {
-    Membership.hasOne(models.User, { foreignKey: { allowNull: false } });
+    Membership.hasOne(models.User, {
+      foreignKey: { allowNull: false },
+      onDelete: 'RESTRICT',
+    });
   };
 
   return Membership;
