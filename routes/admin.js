@@ -14,6 +14,10 @@ router.get('/categories', (req, res, next) => {
   res.render('admin-categories');
 });
 
+router.get('/roles', (req, res, next) => {
+  res.render('admin-roles');
+});
+
 router.get('/logout', (req, res, next) => {
   res.clearCookie('token');
   res.redirect('/');
