@@ -68,20 +68,18 @@ class UserService {
     }).catch((e) => e);
   }
 
-  async updateUser(user) {
-    const {
-      id,
-      firstName,
-      lastName,
-      username,
-      email,
-      address,
-      telephone,
-      itemPurchased,
-      MembershipId,
-      RoleId,
-    } = user;
-
+  async updateUser(
+    id,
+    firstName,
+    lastName,
+    username,
+    email,
+    address,
+    telephone,
+    itemPurchased,
+    MembershipId,
+    RoleId
+  ) {
     return await this.User.update(
       {
         firstName,

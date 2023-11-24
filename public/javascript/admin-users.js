@@ -114,8 +114,10 @@ async function userUpdate(id) {
   const username = $('#username').val();
   const firstName = $('#firstName').val();
   const lastName = $('#lastName').val();
+  const address = $('#address').val();
+  const telephone = $('#telephone').val();
   const RoleId = $('#user-role-select option:selected').val();
-  const membershipId = $('#membershipId').val();
+  const MembershipId = $('#user-membership-select option:selected').val();
   const itemsPurchased = $('#itemsPurchased').val();
 
   const data = JSON.stringify({
@@ -123,8 +125,11 @@ async function userUpdate(id) {
     firstName: firstName,
     lastName: lastName,
     RoleId: RoleId,
-    membershipId: membershipId,
+    MembershipId: MembershipId,
     itemsPurchased: itemsPurchased,
+    username: username,
+    address: address,
+    telephone: telephone,
   });
 
   $.ajax({
@@ -138,7 +143,7 @@ async function userUpdate(id) {
       hideModal('#modal-update');
       emptyContainer('#user-container');
       showToast('Success', 'User updated');
-      getUser();
+      getUsers();
     },
     error: function (err) {
       hideSpinner();
@@ -214,8 +219,6 @@ function showUpdateForm(id) {
             <select class="form-select" name="user-membership-select" aria-label=".form-select-lg example" id="user-membership-select">  
             </select>
           </div>
-          <input hidden  id="membershipId" value="${userMembershipId}"/>
-          <input hidden  id="roleId" value="${userRoleId}"/>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" onclick ="userUpdate(${id})" >Update</button>
