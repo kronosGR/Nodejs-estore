@@ -26,6 +26,7 @@ function emptyContainer(selector) {
 
 function hideModal(selector) {
   $(selector).modal('hide');
+  $(selector).remove();
 }
 
 function showModal(selector) {

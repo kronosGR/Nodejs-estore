@@ -62,4 +62,51 @@ router.put('/:userId', async (req, res, next) => {
   return res.jsend.success({ data: { statusCode: 200, result: 'User updated' } });
 });
 
+router.post('/', async (req, res, next) => {
+  const {
+    username,
+    email,
+    firstName,
+    lastName,
+    itemsPurchased,
+    address,
+    telephone,
+    MembershipId,
+    RoleId,
+  } = req.body;
+
+  if (
+    isEmpty(username) ||
+    isEmpty(email) ||
+    isEmpty(firstName) ||
+    isEmpty(lastName) ||
+    isEmpty(itemsPurchased) ||
+    isEmpty(address) ||
+    isEmpty(telephone) ||
+    isEmpty(MembershipId) ||
+    isEmpty(RoleId)
+  ) {
+    return next(createHttpError(400, 'All fields are required'));
+  }
+
+  const ret = await userService.addUser(
+    firstName,
+    lastName,
+    username,
+    email,
+    address,
+    telephone,
+    itemsPurchased,
+    MembershipId,
+    RoleId
+  );
+
+  if (ret.errors) {
+    const errorMsg = r.errors[0].message;
+    console.error(errorMsg);
+    return next(createHttpError(500, errorMsg));
+  }
+  return res.jsend.success({ data: { statusCode: 200, result: 'User added' } });
+});
+
 module.exports = router;
