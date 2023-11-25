@@ -153,7 +153,6 @@ async function userUpdate(id) {
 }
 
 function showUpdateForm(id) {
-  console.log(id);
   const email = $(`#${id}-email`).text().trim();
   const username = $(`#${id}-username`).text().trim();
   const firstName = $(`#${id}-firstName`).text().trim();
@@ -276,6 +275,14 @@ function showAddUserForm() {
             <input type="text" name="username" class="form-control " id="username">
           </div>
           <div class="mb-3 d-flex flex-column text-start">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" name="password" class="form-control " id="password">
+          </div>
+          <div class="mb-3 d-flex flex-column text-start">
+            <label for="password2" class="form-label">Password Again</label>
+            <input type="password" name="password" class="form-control " id="password2">
+          </div>
+          <div class="mb-3 d-flex flex-column text-start">
             <label for="firstName" class="form-label">First Name </label>
             <input type="text" name="firstName" class="form-control " id="firstName">
           </div>
@@ -339,13 +346,23 @@ async function userAdd() {
   showSpinner();
   const email = $('#email').val();
   const username = $('#username').val();
+  const password = $('#password').val();
+  const password2 = $('#password2').val();
   const firstName = $('#firstName').val();
   const lastName = $('#lastName').val();
   const address = $('#address').val();
   const telephone = $('#telephone').val();
-  const RoleId = $('#user-role-select option:selected').val();
-  const MembershipId = $('#user-membership-select option:selected').val();
+  const RoleId = $('#new-user-role-select option:selected').val();
+  const MembershipId = $('#new-user-membership-select option:selected').val();
   const itemsPurchased = $('#itemsPurchased').val();
+  console.log(RoleId, MembershipId);
+
+  if (password !== password2) {
+    hideSpinner();
+    hideModal('#modal-add');
+    showToast('Error', 'Passwords do not match');
+    return;
+  }
 
   const data = JSON.stringify({
     email: email,
@@ -353,10 +370,11 @@ async function userAdd() {
     lastName: lastName,
     RoleId: RoleId,
     MembershipId: MembershipId,
-    itemsPurchased: itemsPurchased,
+    itemsPurchased: parseInt(itemsPurchased),
     username: username,
     address: address,
     telephone: telephone,
+    password: password,
   });
 
   $.ajax({

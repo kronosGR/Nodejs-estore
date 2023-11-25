@@ -51,7 +51,7 @@ router.put('/:categoryId', async (req, res, next) => {
 
   const ret = await categoryService.updateCategory(categoryId, name);
   if (ret.errors) {
-    const errorMsg = r.errors[0].message;
+    const errorMsg = ret.errors[0].message;
     console.error(errorMsg);
     return next(createHttpError(500, errorMsg));
   }

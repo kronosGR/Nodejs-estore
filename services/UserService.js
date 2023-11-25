@@ -40,23 +40,26 @@ class UserService {
     password,
     address,
     telephone,
+    itemsPurchased,
     MembershipId,
     RoleId
   ) {
+    console.log(RoleId);
     const salt = crypto.randomBytes(16);
     const encryptedPassword = await encryptPassword(password, salt);
 
     return this.User.create({
-      firstName,
-      lastName,
-      username,
-      email,
-      encryptedPassword,
-      salt,
-      address,
-      telephone,
-      MembershipId,
-      RoleId,
+      firstName: firstName,
+      lastName: lastName,
+      username: username,
+      email: email,
+      encryptedPassword: encryptedPassword,
+      salt: salt,
+      address: address,
+      telephone: telephone,
+      itemsPurchased: itemsPurchased,
+      MembershipId: MembershipId,
+      RoleId: RoleId,
     }).catch((e) => {
       return e;
     });
@@ -76,7 +79,7 @@ class UserService {
     email,
     address,
     telephone,
-    itemPurchased,
+    itemsPurchased,
     MembershipId,
     RoleId
   ) {
@@ -88,7 +91,7 @@ class UserService {
         email,
         address,
         telephone,
-        itemPurchased,
+        itemsPurchased,
         MembershipId,
         RoleId,
       },

@@ -4,6 +4,7 @@ const db = require('../models');
 const UserService = require('../services/UserService');
 const isEmpty = require('../utils/isEmpty');
 const createHttpError = require('http-errors');
+const isValidEmail = require('../middleware/isValidEmail');
 
 const userService = new UserService(db);
 var router = express.Router();
@@ -41,6 +42,7 @@ router.put('/:userId', async (req, res, next) => {
   ) {
     return next(createHttpError(400, 'All fields are required'));
   }
+
   const ret = await userService.updateUser(
     userId,
     firstName,
@@ -62,10 +64,11 @@ router.put('/:userId', async (req, res, next) => {
   return res.jsend.success({ data: { statusCode: 200, result: 'User updated' } });
 });
 
-router.post('/', async (req, res, next) => {
+router.post('/', isValidEmail, async (req, res, next) => {
   const {
     username,
     email,
+    password,
     firstName,
     lastName,
     itemsPurchased,
@@ -84,7 +87,8 @@ router.post('/', async (req, res, next) => {
     isEmpty(address) ||
     isEmpty(telephone) ||
     isEmpty(MembershipId) ||
-    isEmpty(RoleId)
+    isEmpty(RoleId) ||
+    isEmpty(password)
   ) {
     return next(createHttpError(400, 'All fields are required'));
   }
@@ -94,6 +98,7 @@ router.post('/', async (req, res, next) => {
     lastName,
     username,
     email,
+    password,
     address,
     telephone,
     itemsPurchased,
@@ -102,7 +107,7 @@ router.post('/', async (req, res, next) => {
   );
 
   if (ret.errors) {
-    const errorMsg = r.errors[0].message;
+    const errorMsg = ret.errors[0].message;
     console.error(errorMsg);
     return next(createHttpError(500, errorMsg));
   }
