@@ -35,11 +35,11 @@ function showModal(selector) {
 
 function getColorClassForRole(role) {
   switch (role) {
-    case 'bronze':
+    case 'Bronze':
       return 'bronze';
-    case 'silver':
+    case 'Silver':
       return 'silver';
-    case 'gold':
+    case 'Gold':
       return 'gold';
     default:
       return 'bronze';
