@@ -1,4 +1,4 @@
-$(document).ready(async function () {
+$(async function () {
   await getCategories();
 });
 

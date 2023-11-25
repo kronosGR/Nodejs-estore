@@ -18,6 +18,10 @@ router.get('/roles', (req, res, next) => {
   res.render('admin-roles');
 });
 
+router.get('/memberships', (req, res, next) => {
+  res.render('admin-memberships');
+});
+
 router.get('/users', (req, res, next) => {
   res.render('admin-users');
 });

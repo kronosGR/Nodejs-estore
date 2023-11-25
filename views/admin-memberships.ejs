@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%- include('./partials/head.ejs') %>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Memberships</title>
+</head>
+
+<body>
+  <div class="container-fluid mt-5 text-center p-2">
+    <%- include('./partials/navbar.ejs') %>
+
+    <div class="container-fluid mt-5 bg-white">
+      <div class="d-flex justify-content-between align-items-center  ">
+        <h2 class="p-3 text-center">Roles</i></h2>
+        <button class="btn btn-success height-50" onclick="showAddRoleForm()"><i class="bi bi-plus-square"></i> Add
+          Role</>
+      </div>
+      <div class="list-group">
+        <div class="row px-3 py-1 w-100">
+          <div class="col py-1 text-start">Id</div>
+          <div class="col py-1 text-start ">Name</div>
+          <div class="col py-1 text-start ">From %</div>
+          <div class="col py-1 text-start ">To %</div>
+          <div class="col py-1 text-start ">Discount %</div>
+          <div class="col py-1 text-start ">Options</div>
+        </div>
+        <div id="membership-container">
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  <%- include('partials/extras.ejs') %>
+  <%- include('./partials/scripts.ejs') %>
+  <script src="/javascript/admin-memberships.js"></script>
+</body>
+
+</html>
