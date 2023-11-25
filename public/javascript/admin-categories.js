@@ -150,7 +150,6 @@ function showAddCategoryForm() {
 async function categoryAdd() {
   showSpinner();
   const name = $('#new-category-name').val();
-  console.log(name.length);
   const data = JSON.stringify({ name: name });
 
   $.ajax({
