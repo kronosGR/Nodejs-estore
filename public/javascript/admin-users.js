@@ -49,31 +49,31 @@ async function getUsers() {
       users.forEach((user) => {
         const row = `
          <div class="row px-3 py-1 w-100" >
-            <div class="col py-2 bg-light" id="${user.id}-id">
+            <div class="col-1 py-2 bg-light" id="${user.id}-id">
               ${user.id}
             </div>
-            <div class="col py-2 bg-light text-start" id="${user.id}-username">
+            <div class="col-1 py-2 bg-light text-start" id="${user.id}-username">
               ${user.username}
             </div>
-            <div class="col py-2 bg-light text-start" id="${user.id}-firstName">
+            <div class="col-1 py-2 bg-light text-start" id="${user.id}-firstName">
               ${user.firstName}
             </div>
-            <div class="col py-2 bg-light text-start" id="${user.id}-lastName">
+            <div class="col-1 py-2 bg-light text-start" id="${user.id}-lastName">
               ${user.lastName}
             </div>
-            <div class="col py-2 bg-light text-start" id="${user.id}-email">
+            <div class="col-2 py-2 bg-light text-start" id="${user.id}-email">
               ${user.email}
             </div>
-            <div class="col py-2 bg-light text-start" id="${user.id}-address">
+            <div class="col-2 py-2 bg-light text-start" id="${user.id}-address">
               ${user.address}
             </div>
-            <div class="col py-2 bg-light text-start" id="${user.id}-telephone">
+            <div class="col-1 py-2 bg-light text-start" id="${user.id}-telephone">
               ${user.telephone}
             </div>
-            <div class="col py-2 bg-light text-start" id="${user.id}-role">
+            <div class="col-1 py-2 bg-light text-start" id="${user.id}-role">
               ${user.Role.name}
             </div>
-            <div class="col py-1 bg-light ">
+            <div class="col-1 py-1 bg-light ">
               <div class="p-1 w-50 ${getColorClassForRole(user.Membership.name)}" id="${
           user.id
         }-membership">
@@ -83,10 +83,10 @@ async function getUsers() {
             <div hidden  id="${user.id}-membershipId">${user.Membership.id}</div>
             <div hidden  id="${user.id}-roleId">${user.Role.id}</div>
             <div hidden  id="${user.id}-itemsPurchased">${user.itemsPurchased}</div>
-            <div class="col  bg-light ">
+            <div class="col-1  bg-light ">
               <button id="brand-delete" class="btn btn-warning ${
-                user.Role.name == 'Admin' ? 'disabled' : ''
-              }" onclick="roleDelete(${user.id})"><i
+                user.username == 'Admin' ? 'disabled' : ''
+              }" onclick="userDelete(${user.id})"><i
                   class="bi bi-trash"></i></button>
               <button id="brand-edit " class=" btn btn-danger" onclick="showUpdateForm(${
                 user.id
@@ -400,6 +400,26 @@ async function userAdd() {
     error: function (err) {
       hideSpinner();
       hideModal('#modal-add');
+      showToast('Error', err.responseJSON.data.data);
+    },
+  });
+}
+
+async function userDelete(id) {
+  showSpinner();
+  $.ajax({
+    type: 'DELETE',
+    url: API_USERS_URL + `/${id}`,
+    contentType: 'Application/json',
+    dataType: 'json',
+    success: function (result) {
+      hideSpinner();
+      emptyContainer('#user-container');
+      showToast('Success', 'User deleted!');
+      getUsers();
+    },
+    error: function (err) {
+      hideSpinner();
       showToast('Error', err.responseJSON.data.data);
     },
   });

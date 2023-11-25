@@ -5,6 +5,7 @@ const UserService = require('../services/UserService');
 const isEmpty = require('../utils/isEmpty');
 const createHttpError = require('http-errors');
 const isValidEmail = require('../middleware/isValidEmail');
+const isAdmin = require('../middleware/isAdmin');
 
 const userService = new UserService(db);
 var router = express.Router();
@@ -112,6 +113,19 @@ router.post('/', isValidEmail, async (req, res, next) => {
     return next(createHttpError(500, errorMsg));
   }
   return res.jsend.success({ data: { statusCode: 200, result: 'User added' } });
+});
+
+router.delete('/:userId', isAdmin, async (req, res, next) => {
+  const userId = req.params.userId;
+  try {
+    const res = await userService.deleteUser(userId);
+    if (res.name == 'SequelizeForeignKeyConstraintError') {
+      return next(createHttpError(500, 'The user is being used'));
+    }
+  } catch (e) {
+    return next(createHttpError(500, 'There was an error deleting the user'));
+  }
+  res.jsend.success({ statusCode: 200, result: 'User deleted' });
 });
 
 module.exports = router;
