@@ -8,15 +8,77 @@
   <link rel='stylesheet' href='/stylesheets/style.css' />
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title><%= title %></title>
+  <title>Products</title>
 </head>
 
 <body>
-  <div class="container-fluid mt-5 text-center">
-
+  <div class="container-fluid mt-5 text-center p-0">
     <%- include('./partials/navbar.ejs') %>
+
+    <div class="container-fluid mt-5 bg-white">
+      <div class="d-flex justify-content-between align-items-center  ">
+        <h2 class="p-3 text-center">Products</i></h2>
+
+      </div>
+      <div class="row">
+        <div class="col-2 d-flex flex-column text-start ">
+          <label for="search" class="form-label">Product Name</label>
+          <input type="text" class="form-control " id="search" />
+        </div>
+        <div class="col-2 d-flex flex-column text-start ">
+          <label for="category-select" class="form-label">Category</label>
+          <select class="form-select" name="user-role-select" aria-label=".form-select-lg" id="category-select">
+            <option value="0">None</option>
+          </select>
+        </div>
+        <div class="col-2 d-flex flex-column text-start ">
+          <label for="brands-select" class="form-label">Brands</label>
+          <select class="form-select" name="user-role-select" aria-label=".form-select-lg" id="brands-select">
+            <option value="0">None</option>
+          </select>
+        </div>
+        <div class="col-2"></div>
+        <div class="col-2">
+          <button type="button" class="btn btn-success" onclick="">Search</button>
+          <button type="button" class="btn btn-warning" onclick=''>Clear</button>
+        </div>
+        <div class="col-2">
+          <button class="btn btn-success" onclick="showAddProductForm()"><i class="bi bi-plus-square"></i> Add
+            User</button>
+        </div>
+      </div>
+      <div class="card mt-2">
+        <div class="card-header text-start">
+          Current Products
+        </div>
+        <div class="list-group">
+          <div class="row px-3 py-1 w-100">
+            <div class="col-1 py-1 text-start w-40p">Id</div>
+            <div class="col-1 py-1 text-start w-100p">Name</div>
+            <div class="col-1 py-1 text-start w-300p">Description</div>
+            <div class="col-1 py-1 text-start w-80p">Quantity</div>
+            <div class="col-1 py-1 text-start w-60p">Price</div>
+            <div class="col-1 py-1 text-start w-80p">Discount</div>
+            <div class="col-1 py-1 text-start w-70p">Brand</div>
+            <div class="col-1 py-1 text-start w-100p">Category</div>
+            <div class="col-1 py-1 text-start w-250p">Image Url</div>
+            <div class="col-1 py-1 text-start w-70p">Image</div>
+            <div class="col-1 py-1 text-start w-90p">isDeleted</div>
+            <div class="col-1 py-1 text-start w-100p">Date Added</div>
+            <div class="col-1 py-1 text-start w-100p">Options</div>
+          </div>
+          <div id="user-container">
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
   </div>
+  <%- include('partials/extras.ejs') %>
   <%- include('./partials/scripts.ejs') %>
+  <script src="/javascript/admin-products.js"></script>
 </body>
 
 </html>

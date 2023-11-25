@@ -20,6 +20,7 @@ const categoriesRouter = require('./routes/categories');
 const rolesRouter = require('./routes/roles');
 const usersRouter = require('./routes/users');
 const membershipsRouter = require('./routes/memberships');
+const productsRouter = require('./routes/products');
 
 var app = express();
 
@@ -47,6 +48,7 @@ app.use('/categories', categoriesRouter);
 app.use('/roles', rolesRouter);
 app.use('/users', usersRouter);
 app.use('/memberships', membershipsRouter);
+app.use('/products', productsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
