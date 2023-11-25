@@ -89,7 +89,8 @@ async function brandUpdate(id, name) {
 
 function showUpdateForm(id, name) {
   const modalUpdate = `
-    <div class="modal" tabindex="-1" role="dialog" id="modal-update">
+    <div class="modal" tabindex="-1" role="dialog" id="modal-update" data-bs-backdrop="static" 
+    data-bs-backdrop="false">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -119,7 +120,8 @@ function showUpdateForm(id, name) {
 
 function showAddBrandForm() {
   const modalAdd = `
-    <div class="modal" tabindex="-1" role="dialog" id="modal-add">
+    <div class="modal" tabindex="-1" role="dialog" id="modal-add" data-bs-backdrop="static" 
+    data-bs-backdrop="false">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">

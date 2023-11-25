@@ -42,4 +42,26 @@ router.post('/', isAdmin, async (req, res, next) => {
   return res.jsend.success({ data: { statusCode: 201, result: ret } });
 });
 
+router.put('/:membershipId', async (req, res, next) => {
+  const membershipId = req.params.membershipId;
+  const { name, from, to, discount } = req.body;
+  if (isEmpty(name) || isEmpty(from) || isEmpty(to) || isEmpty(discount)) {
+    return next(createHttpError(400, 'All fields are required'));
+  }
+
+  const ret = await membershipService.updateMembership(
+    membershipId,
+    name,
+    from,
+    to,
+    discount
+  );
+  if (ret.errors) {
+    const errorMsg = ret.errors[0].message;
+    console.error(errorMsg);
+    return next(createHttpError(500, errorMsg));
+  }
+  return res.jsend.success({ data: { statusCode: 200, result: 'Membership updated' } });
+});
+
 module.exports = router;
