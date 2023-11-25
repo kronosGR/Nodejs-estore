@@ -176,7 +176,8 @@ function showUpdateForm(id) {
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body row">
+        <div class="col">  
           <div class="mb-3 d-flex flex-column text-start">
             <label for="id" class="form-label">id</label>
             <input type="text" name="id" class="form-control" disabled  id="id" value='${id}'>
@@ -197,6 +198,8 @@ function showUpdateForm(id) {
             <label for="lastName" class="form-label">Last Name</label>
             <input type="text" name="lastName" class="form-control " id="lastName" value='${lastName}'>
           </div>
+        </div>       
+        <div class="col">
           <div class="mb-3 d-flex flex-column text-start">
             <label for="telephone" class="form-label">Telephone</label>
             <input type="text" name="telephone" class="form-control " id="telephone" value='${telephone}'>
@@ -265,7 +268,8 @@ function showAddUserForm() {
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">          
+        <div class="modal-body row">   
+        <div class="col">       
           <div class="mb-3 d-flex flex-column text-start">
             <label for="email" class="form-label">Email</label>
             <input type="text" class="form-control" id="email">
@@ -286,6 +290,8 @@ function showAddUserForm() {
             <label for="firstName" class="form-label">First Name </label>
             <input type="text" name="firstName" class="form-control " id="firstName">
           </div>
+        </div>       
+        <div class="col">
           <div class="mb-3 d-flex flex-column text-start">
             <label for="lastName" class="form-label">Last Name</label>
             <input type="text" name="lastName" class="form-control " id="lastName">
@@ -311,6 +317,7 @@ function showAddUserForm() {
             <label for="new-user-membership-select" class="form-label">Membership</label>
             <select class="form-select" name="new-user-membership-select" aria-label=".form-select-lg example" id="new-user-membership-select">  
             </select>
+          </div>
           </div>
         </div>
         <div class="modal-footer">
