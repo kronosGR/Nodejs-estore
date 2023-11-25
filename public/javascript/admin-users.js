@@ -167,7 +167,7 @@ function showUpdateForm(id) {
 
   const modalUpdate = `
     <div class="modal" tabindex="-1" role="dialog" id="modal-update" data-bs-backdrop="static" 
-    data-bs-backdrop="false">
+    data-bs-keyboard="false">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -258,7 +258,7 @@ function showUpdateForm(id) {
 function showAddUserForm() {
   const modalAdd = `
     <div class="modal" tabindex="-1" role="dialog" id="modal-add" data-bs-backdrop="static" 
-    data-bs-backdrop="false">
+    data-bs-keyboard="false">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
