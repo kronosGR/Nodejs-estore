@@ -1,6 +1,5 @@
 let brands;
 let categories;
-let searchObject = {};
 
 $(function () {
   hideSpinner();
@@ -11,12 +10,13 @@ $(function () {
 
 function clearSearch() {
   $('#search').val('');
-  let searchCategory = $('#category-select').val(0);
-  let searchBrand = $('#brands-select').val(0);
+  $('#category-select').val(0);
+  $('#brands-select').val(0);
   getProducts('');
 }
 
 function search() {
+  let searchObject = {};
   let searchProduct = $('#search').val();
   let searchCategory = $('#category-select option:selected').val();
   let searchBrand = $('#brands-select option:selected').val();
@@ -42,7 +42,7 @@ function search() {
     for (const [k, v] of Object.entries(searchObject)) {
       switch (k) {
         case 'name':
-          whereClause += "name like '%" + v + "%' ";
+          whereClause += "products.name like ''" + v + "''' ";
           break;
         case 'category':
           whereClause += "CategoryId = '" + v + "' ";
@@ -60,8 +60,7 @@ function search() {
       i++;
     }
   }
-  console.log(searchObject);
-  console.log(whereClause);
+  getProducts(whereClause);
 }
 
 async function getBrands() {
@@ -105,6 +104,7 @@ async function getCategories() {
 }
 
 async function getProducts(whereClause) {
+  emptyContainer('#product-container');
   showSpinner();
   $.ajax({
     type: 'GET',
@@ -113,8 +113,9 @@ async function getProducts(whereClause) {
     dataType: 'json',
     success: function (result) {
       const products = result.data.data.result;
-      products.forEach((product) => {
-        const row = `
+      if (products.length > 0) {
+        products.forEach((product) => {
+          const row = `
         <div class="row px-3 py-1 w-100" >
             <div class="col-1 py-2 bg-light w-40p text-start" id="${product.id}-id">
               ${product.id}
@@ -171,8 +172,11 @@ async function getProducts(whereClause) {
         </div>
        </div>
         `;
-        $('#product-container').append(row);
-      });
+          $('#product-container').append(row);
+        });
+      } else {
+        showToast('No Products', 'Products found');
+      }
       console.log(products);
       hideSpinner();
     },

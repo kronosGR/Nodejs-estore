@@ -11,8 +11,9 @@ const productService = new ProductService(db);
 const router = express.Router();
 
 router.get('/', async (req, res, next) => {
-  const whereClause = req.query.whereclause;
-  console.log(whereClause);
+  let whereClause = req.query.whereclause;
+  whereClause = whereClause.replace("'''", "%'");
+  whereClause = whereClause.replace("''", "'%");
   const products = await productService.getProducts(whereClause);
   return res.jsend.success({ data: { statusCode: 200, result: products } });
 });
