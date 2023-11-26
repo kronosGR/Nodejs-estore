@@ -362,7 +362,6 @@ async function userAdd() {
   const RoleId = $('#new-user-role-select option:selected').val();
   const MembershipId = $('#new-user-membership-select option:selected').val();
   const itemsPurchased = $('#itemsPurchased').val();
-  console.log(RoleId, MembershipId);
 
   if (password !== password2) {
     hideSpinner();

@@ -4,6 +4,11 @@ body {
   background-image: url('../images/background.jpg');
 }
 
+.scrollable .row {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
 a {
   color: #00b7ff;
 }
@@ -38,6 +43,14 @@ a {
 
 .w-100p {
   width: 100px !important;
+}
+
+.w-120p {
+  width: 120px !important;
+}
+
+.w-150p {
+  width: 150px !important;
 }
 
 .w-200p {

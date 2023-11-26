@@ -40,34 +40,34 @@
         <div class="col-2"></div>
         <div class="col-2">
           <button type="button" class="btn btn-success" onclick="search()">Search</button>
-          <button type="button" class="btn btn-warning" onclick='clear()'>Clear</button>
+          <button type="button" class="btn btn-warning" onclick="clearSearch()">Clear</button>
         </div>
-        <div class="col-2">
+        <div class=" col-2">
           <button class="btn btn-success" onclick="showAddProductForm()"><i class="bi bi-plus-square"></i> Add
-            User</button>
+            Product</button>
         </div>
       </div>
       <div class="card mt-2">
         <div class="card-header text-start">
           Current Products
         </div>
-        <div class="list-group">
+        <div class="list-group scrollable">
           <div class="row px-3 py-1 w-100">
             <div class="col-1 py-1 text-start w-40p">Id</div>
-            <div class="col-1 py-1 text-start w-100p">Name</div>
+            <div class="col-1 py-1 text-start w-150p">Name</div>
             <div class="col-1 py-1 text-start w-300p">Description</div>
             <div class="col-1 py-1 text-start w-80p">Quantity</div>
             <div class="col-1 py-1 text-start w-60p">Price</div>
-            <div class="col-1 py-1 text-start w-80p">Discount</div>
+            <!-- <div class="col-1 py-1 text-start w-80p">Discount</div> -->
             <div class="col-1 py-1 text-start w-70p">Brand</div>
             <div class="col-1 py-1 text-start w-100p">Category</div>
             <div class="col-1 py-1 text-start w-250p">Image Url</div>
             <div class="col-1 py-1 text-start w-70p">Image</div>
             <div class="col-1 py-1 text-start w-90p">isDeleted</div>
-            <div class="col-1 py-1 text-start w-100p">Date Added</div>
-            <div class="col-1 py-1 text-start w-100p">Options</div>
+            <div class="col-1 py-1 text-start w-120p">Date Added</div>
+            <div class="col-1 py-1 text-start w-120p">Options</div>
           </div>
-          <div id="user-container">
+          <div id="product-container">
 
           </div>
         </div>
@@ -78,7 +78,7 @@
   </div>
   <%- include('partials/extras.ejs') %>
   <%- include('./partials/scripts.ejs') %>
-  <script src="/javascript/admin-products.js"></script>
+  <script src="/javascript/admin.js"></script>
 </body>
 
 </html>

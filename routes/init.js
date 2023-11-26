@@ -65,7 +65,7 @@ router.post('/', async function (req, res, next) {
     await categoryService.addCategory('Watches');
 
     //add initial products
-    const products = await fetchInitialProducts(process.env.INIT_URL); //console.log(products.data);
+    const products = await fetchInitialProducts(process.env.INIT_URL);
     products.data.forEach(async (item) => {
       const catId = (await categoryService.getCategoryIdByName(item.category))[0].id;
       const brandId = (await brandService.getBrandIdByName(item.brand))[0].id;

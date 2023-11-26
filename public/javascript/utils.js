@@ -5,6 +5,7 @@ const API_MEMBERSHIP_URL = API_URL + '/memberships';
 const API_CATEGORY_URL = API_URL + '/categories';
 const API_ROLE_URL = API_URL + '/roles';
 const API_USERS_URL = API_URL + '/users';
+const API_PRODUCTS_URL = API_URL + '/products';
 
 function showToast(title, message) {
   $('#toast-title').text(title);
