@@ -122,7 +122,9 @@ async function getProducts(whereClause) {
             <div class="col-1 py-2 bg-light w-150p text-start" id="${product.id}-name">
               ${product.name}
             </div>
-            <div class="col-1 py-2 bg-light w-300p text-start" id="${product.id}-description">
+            <div class="col-1 py-2 bg-light w-300p text-start" id="${
+              product.id
+            }-description">
               ${product.description}
             </div>
             <div class="col-1 py-2 bg-light w-80p text-start" id="${product.id}-quantity">
@@ -131,10 +133,14 @@ async function getProducts(whereClause) {
             <div class="col-1 py-2 bg-light w-60p text-start" id="${product.id}-price">
               ${product.price}
             </div>
-            <div class="col-1 py-2 bg-light w-70p text-start" id="${product.id}-brandName">
+            <div class="col-1 py-2 bg-light w-70p text-start" id="${
+              product.id
+            }-brandName">
               ${product.brandName}
             </div>
-            <div class="col-1 py-2 bg-light w-100p text-start" id="${product.id}-categoryName">
+            <div class="col-1 py-2 bg-light w-100p text-start" id="${
+              product.id
+            }-categoryName">
               ${product.categoryName}
             </div>
             <div class="col-1 py-2 bg-light w-250p text-start" id="${product.id}-imgUrl">
@@ -142,16 +148,24 @@ async function getProducts(whereClause) {
             </div>
             <img class="col-1 py-2 bg-light w-70p text-start" id="${product.id}-imgUrl"
               src='${product.imgUrl}'>
-            <div class="col-1 py-2 bg-light w-90p text-start" id="${product.id}-isDeleted">
-              ${product.isDeleted}
+            <div class="col-1 py-2 bg-light w-90p form-check form-switch d-flex justify-content-center" >
+              <input class="form-check-input" type="checkbox" ${
+                product.isDeleted == 1 ? 'checked' : ''
+              } id="${product.id}-isDeleted" disabled>            
             </div>
-            <div class="col-1 py-2 bg-light w-120p text-start" id="${product.id}-createdAt">
+            <div class="col-1 py-2 bg-light w-120p text-start" id="${
+              product.id
+            }-createdAt">
               ${product.createdAt}
             </div>
             <div class="col-1  bg-light w-120p text-start">
-              <button id="brand-delete" class="btn btn-warning" onclick="productDelete(${product.id})"><i
+              <button id="brand-delete" class="btn btn-warning" onclick="productDelete(${
+                product.id
+              })"><i
                   class="bi bi-trash"></i></button>
-              <button id="brand-edit " class=" btn btn-danger" onclick="showUpdateForm(${product.id})">
+              <button id="brand-edit " class=" btn btn-danger" onclick="showUpdateForm(${
+                product.id
+              })">
               <i class="bi bi-pencil"></i></button>
             </div>
         </div>
