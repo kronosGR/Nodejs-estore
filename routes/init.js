@@ -39,8 +39,8 @@ router.post('/', async function (req, res, next) {
       'admin@noroff.no',
       'P@ssword2023',
       'Online',
-      '0',
       '911',
+      '0',
       '3',
       '1'
     );

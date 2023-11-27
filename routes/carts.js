@@ -37,50 +37,47 @@ router.post('/:cartId', isRegisteredUser, async (req, res, next) => {
     return next(createHttpError(400, 'All fields are required'));
   }
 
-  // check product quantity
-  const cQuantity = await productService.getProductQuantity(productId);
-  if (cQuantity >= quantity) {
-    // get user discount
-    const membership = await userService.getUserDiscount(decodedToken.id);
-    const discount = membership.discount;
+  // get user discount
+  const membership = await userService.getUserDiscount(decodedToken.id);
+  const discount = membership.discount;
 
-    // calculate the new item price
-    unitPrice = unitPrice - (unitPrice * discount) / 100;
+  // calculate the new item price
+  unitPrice = unitPrice - (unitPrice * discount) / 100;
 
-    // add/update product to cartItem
-    const cartItem = await cartItemService.getItemFromCart(productId, cartId);
-    if (cartItem) {
-      // increase by one quantity
-      const newQuantity = cartItem.quantity + quantity;
-      if (cQuantity >= newQuantity) {
-        const updatedCartItem = await cartItemService.updateItemInCart(
-          cartId,
-          productId,
-          newQuantity,
-          unitPrice
-        );
-      } else {
-        return next(createHttpError(400, 'Not enough items to add to the Cart'));
-      }
-    } else {
-      // add item to cart
-      await cartItemService.addItemToCart(cartId, productId, quantity, unitPrice);
-    }
+  // add/update product to cartItem
+  const cartItem = await cartItemService.getItemFromCart(productId, cartId);
+  if (cartItem) {
+    // increase by one quantity
 
-    // update cart total
-    const cart = await cartService.getCartForUser(decodedToken.id);
-    const cartItems = cart.CartItems;
-    let total = 0;
-    cartItems.forEach((item) => {
-      total += item.quantity * item.unitPrice;
-    });
-    const resp = await cartService.updateCartForUser(cartId, total);
-    return res.jsend.success({
-      data: { statusCode: 200, result: 'Item(s) added to cart' },
-    });
+    const updatedCartItem = await cartItemService.updateItemInCart(
+      cartId,
+      productId,
+      newQuantity,
+      unitPrice
+    );
   } else {
-    return next(createHttpError(400, 'Not enough items to add to the Cart'));
+    // add item to cart
+    await cartItemService.addItemToCart(cartId, productId, quantity, unitPrice);
   }
+
+  // update cart total
+  const cart = await cartService.getCartForUser(decodedToken.id);
+  const cartItems = cart.CartItems;
+  let total = 0;
+  cartItems.forEach((item) => {
+    total += item.quantity * item.unitPrice;
+  });
+  const resp = await cartService.updateCartForUser(cartId, total);
+  return res.jsend.success({
+    data: { statusCode: 200, result: 'Item(s) added to cart' },
+  });
 });
 
 module.exports = router;
+
+// check product quantity
+// const cQuantity = await productService.getProductQuantity(productId);
+// if (cQuantity >= quantity) {
+// } else {
+//   return next(createHttpError(400, 'Not enough items to add to the Cart'));
+// }

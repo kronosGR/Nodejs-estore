@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 
 const db = require('../models');
 const UserService = require('../services/UserService');
+const CartService = require('../services/CartService');
 const isValidEmail = require('../middleware/isValidEmail');
 const isEmail = require('../utils/isEmail');
 const encryptPassword = require('../utils/encryptPassword');
@@ -12,6 +13,7 @@ require('dotenv').config();
 
 const router = express.Router();
 const userService = new UserService(db);
+const cartService = new CartService(db);
 
 router.post('/login', async (req, res, next) => {
   const { emailOrUsername, password } = req.body;
@@ -64,7 +66,18 @@ router.post('/login', async (req, res, next) => {
 });
 
 router.post('/register', isValidEmail, async (req, res, next) => {
-  const { firstName, lastName, username, email, password, address, telephone } = req.body;
+  const {
+    firstName,
+    lastName,
+    username,
+    email,
+    password,
+    address,
+    telephone,
+    itemsPurchased,
+    MembershipId,
+    RoleId,
+  } = req.body;
   if (
     firstName == null ||
     lastName == null ||
@@ -72,7 +85,10 @@ router.post('/register', isValidEmail, async (req, res, next) => {
     email == null ||
     password == null ||
     address == null ||
-    telephone == null
+    telephone == null ||
+    itemsPurchased == null ||
+    MembershipId == null ||
+    RoleId == null
   ) {
     return next(createHttpError(400, 'All fields are required'));
   }
@@ -84,8 +100,9 @@ router.post('/register', isValidEmail, async (req, res, next) => {
     password,
     address,
     telephone,
-    1,
-    2
+    itemsPurchased,
+    MembershipId,
+    RoleId
   );
 
   if (r.errors) {
@@ -93,6 +110,9 @@ router.post('/register', isValidEmail, async (req, res, next) => {
     console.error(errorMsg);
     return next(createHttpError(409, r.errors[0].message));
   }
+  const userId = r.id;
+  // add cart for user
+  await cartService.addCart(userId);
 
   return res.jsend.success({
     data: { statusCode: 200, result: 'User account created' },

@@ -9,6 +9,7 @@ class CartService {
     return this.Cart.create({
       total: 0,
       UserId: userId,
+      isCheckedOut: false,
     }).catch((e) => e);
   }
 
