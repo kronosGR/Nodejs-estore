@@ -1,66 +1,40 @@
 let brands;
 let categories;
+let searchObject = { searchOptions: {} };
 
 $(function () {
   hideSpinner();
   getBrands();
   getCategories();
-  getProducts('');
+  getProducts(searchObject);
 });
 
 function clearSearch() {
   $('#search').val('');
   $('#category-select').val(0);
   $('#brands-select').val(0);
-  getProducts('');
+  searchObject = { searchOptions: {} };
+  getProducts(searchObject);
 }
 
 function search() {
-  let searchObject = {};
   let searchProduct = $('#search').val();
   let searchCategory = $('#category-select option:selected').val();
   let searchBrand = $('#brands-select option:selected').val();
-  let whereClause = 'where ';
 
   if (searchProduct.length > 0) {
-    searchObject.name = searchProduct;
+    searchObject.searchOptions.name = searchProduct;
   }
 
   if (searchCategory != 0) {
-    searchObject.category = searchCategory;
+    searchObject.searchOptions.category = searchCategory;
   }
 
   if (searchBrand != 0) {
-    searchObject.brand = searchBrand;
+    searchObject.searchOptions.brand = searchBrand;
   }
 
-  let searchLen = Object.keys(searchObject).length;
-  if (searchLen == 0) {
-    whereClause = '';
-  } else {
-    let i = 0;
-    for (const [k, v] of Object.entries(searchObject)) {
-      switch (k) {
-        case 'name':
-          whereClause += "products.name like ''" + v + "''' ";
-          break;
-        case 'category':
-          whereClause += "CategoryId = '" + v + "' ";
-          break;
-        case 'brand':
-          whereClause += "BrandId = '" + v + "' ";
-          break;
-        default:
-          break;
-      }
-
-      if (i < searchLen - 1) {
-        whereClause += ' and ';
-      }
-      i++;
-    }
-  }
-  getProducts(whereClause);
+  getProducts(searchObject);
 }
 
 async function getBrands() {
@@ -106,10 +80,12 @@ async function getCategories() {
 async function getProducts(whereClause) {
   emptyContainer('#product-container');
   showSpinner();
+  const data = JSON.stringify(whereClause);
   $.ajax({
-    type: 'GET',
-    url: API_PRODUCTS_URL + `/?whereclause=${whereClause}`,
+    type: 'POST',
+    url: API_PRODUCTS_URL,
     contentType: 'Application/json',
+    data: data,
     dataType: 'json',
     success: function (result) {
       const products = result.data.data.result;
@@ -177,7 +153,7 @@ async function getProducts(whereClause) {
           $('#product-container').append(row);
         });
       } else {
-        showToast('No Products', 'Products found');
+        showToast('No Products', 'No Products found');
       }
       hideSpinner();
     },
@@ -307,7 +283,7 @@ async function productAdd() {
       hideModal('#modal-add');
       emptyContainer('#product-container');
       showToast('Success', 'Product Added');
-      getProducts('');
+      getProducts(searchObject);
     },
     error: function (err) {
       hideSpinner();
@@ -328,7 +304,7 @@ async function productDelete(id) {
       hideSpinner();
       emptyContainer('#product-container');
       showToast('Success', 'Product deleted!');
-      getProducts('');
+      getProducts(searchObject);
     },
     error: function (err) {
       hideSpinner();
@@ -466,7 +442,7 @@ async function productUpdate(id) {
       hideModal('#modal-update');
       emptyContainer('#product-container');
       showToast('Success', 'Product updated');
-      getProducts('');
+      getProducts(searchObject);
     },
     error: function (err) {
       hideSpinner();

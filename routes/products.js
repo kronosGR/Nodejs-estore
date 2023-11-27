@@ -10,10 +10,37 @@ const createHttpError = require('http-errors');
 const productService = new ProductService(db);
 const router = express.Router();
 
-router.get('/', async (req, res, next) => {
-  let whereClause = req.query.whereclause;
-  whereClause = whereClause.replace("'''", "%'");
-  whereClause = whereClause.replace("''", "'%");
+router.post('/', async (req, res, next) => {
+  let { searchOptions } = req.body;
+  console.log(searchOptions);
+  let whereClause = 'where ';
+  let searchLen = Object.keys(searchOptions).length;
+  if (searchLen == 0) {
+    whereClause = '';
+  } else {
+    let i = 0;
+    for (const [k, v] of Object.entries(searchOptions)) {
+      switch (k) {
+        case 'name':
+          whereClause += "products.name like '%" + v + "%' ";
+          break;
+        case 'category':
+          whereClause += "CategoryId = '" + v + "' ";
+          break;
+        case 'brand':
+          whereClause += "BrandId = '" + v + "' ";
+          break;
+        default:
+          break;
+      }
+
+      if (i < searchLen - 1) {
+        whereClause += ' and ';
+      }
+      i++;
+    }
+  }
+
   const products = await productService.getProducts(whereClause);
   return res.jsend.success({ data: { statusCode: 200, result: products } });
 });
