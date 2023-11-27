@@ -44,7 +44,6 @@ class UserService {
     MembershipId,
     RoleId
   ) {
-    console.log(RoleId);
     const salt = crypto.randomBytes(16);
     const encryptedPassword = await encryptPassword(password, salt);
 

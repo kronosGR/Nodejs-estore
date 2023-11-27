@@ -2,13 +2,15 @@ var express = require('express');
 
 const db = require('../models');
 const UserService = require('../services/UserService');
+const CartService = require('../services/CartService');
 const isEmpty = require('../utils/isEmpty');
 const createHttpError = require('http-errors');
 const isValidEmail = require('../middleware/isValidEmail');
 const isAdmin = require('../middleware/isAdmin');
 
 const userService = new UserService(db);
-var router = express.Router();
+const cartService = new CartService(db);
+const router = express.Router();
 
 /* GET users listing. */
 router.get('/', async function (req, res, next) {
@@ -112,6 +114,10 @@ router.post('/', isValidEmail, async (req, res, next) => {
     console.error(errorMsg);
     return next(createHttpError(500, errorMsg));
   }
+  const userId = ret.id;
+  // add cart for user
+  await cartService.addCart(userId);
+
   return res.jsend.success({ data: { statusCode: 200, result: 'User added' } });
 });
 
