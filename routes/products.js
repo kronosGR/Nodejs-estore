@@ -53,7 +53,7 @@ router.post('/', isAdmin, isValidUrl, async (req, res, next) => {
   return res.jsend.success({ data: { statusCode: 200, result: 'Product added' } });
 });
 
-router.delete('/:productId', async (req, res, next) => {
+router.delete('/:productId', isAdmin, async (req, res, next) => {
   const productId = req.params.productId;
   try {
     const res = await productService.deleteProduct(productId);
@@ -64,6 +64,44 @@ router.delete('/:productId', async (req, res, next) => {
     return next(createHttpError(500, 'There was an error deleting the product'));
   }
   res.jsend.success({ statusCode: 200, result: 'Product deleted' });
+});
+
+router.put('/:productId', isAdmin, isValidUrl, async (req, res, next) => {
+  const productId = req.params.productId;
+  const { name, imgUrl, description, price, quantity, isDeleted, BrandId, CategoryId } =
+    req.body;
+
+  if (
+    isEmpty(name) ||
+    isEmpty(description) ||
+    isEmpty(quantity) ||
+    isEmpty(price) ||
+    isEmpty(imgUrl) ||
+    isEmpty(isDeleted) ||
+    isEmpty(CategoryId) ||
+    isEmpty(BrandId)
+  ) {
+    return next(createHttpError(400, 'All fields are required'));
+  }
+
+  const ret = await productService.updateProduct(
+    productId,
+    name,
+    imgUrl,
+    description,
+    price,
+    quantity,
+    isDeleted,
+    BrandId,
+    CategoryId
+  );
+
+  if (ret.errors) {
+    const errorMsg = ret.errors[0].message;
+    console.error(errorMsg);
+    return next(createHttpError(500, errorMsg));
+  }
+  return res.jsend.success({ data: { statusCode: 200, result: 'Product updated' } });
 });
 
 module.exports = router;

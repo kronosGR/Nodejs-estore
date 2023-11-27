@@ -58,7 +58,7 @@ router.put('/:userId', async (req, res, next) => {
   );
 
   if (ret.errors) {
-    const errorMsg = r.errors[0].message;
+    const errorMsg = ret.errors[0].message;
     console.error(errorMsg);
     return next(createHttpError(500, errorMsg));
   }

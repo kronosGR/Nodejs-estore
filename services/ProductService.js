@@ -52,6 +52,36 @@ class ProductService {
       }
     ).catch((e) => e);
   }
+
+  async updateProduct(
+    id,
+    name,
+    imgUrl,
+    description,
+    price,
+    quantity,
+    isDeleted,
+    BrandId,
+    CategoryId
+  ) {
+    return await this.Product.update(
+      {
+        name,
+        imgUrl,
+        description,
+        price,
+        quantity,
+        isDeleted,
+        BrandId,
+        CategoryId,
+      },
+      {
+        where: { id: id },
+        returning: true,
+        plain: true,
+      }
+    ).catch((e) => e);
+  }
 }
 
 module.exports = ProductService;
