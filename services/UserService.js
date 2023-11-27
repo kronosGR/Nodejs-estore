@@ -101,6 +101,20 @@ class UserService {
       }
     ).catch((e) => e);
   }
+
+  async getUserDiscount(userId) {
+    const user = await this.User.findOne({
+      where: { id: userId },
+    });
+    return user.MembershipId;
+  }
+
+  async getItemsPurchased(userId) {
+    const user = await this.User.findOne({
+      where: { id: userId },
+    });
+    return user.itemsPurchased;
+  }
 }
 
 module.exports = UserService;

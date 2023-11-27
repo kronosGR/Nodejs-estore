@@ -53,6 +53,26 @@ class ProductService {
     ).catch((e) => e);
   }
 
+  async getProductQuantity(productId) {
+    const product = await this.Product.findOne({
+      where: { id: productId },
+    });
+    return product.quantity;
+  }
+
+  async updateProductQuantity(productId, quantity) {
+    return await this.Product.update(
+      {
+        quantity: quantity,
+      },
+      {
+        where: { id: productId },
+        returning: true,
+        plain: true,
+      }
+    );
+  }
+
   async updateProduct(
     id,
     name,
