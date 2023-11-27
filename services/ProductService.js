@@ -39,6 +39,19 @@ class ProductService {
       type: this.sequelize.QueryTypes.SELECT,
     });
   }
+
+  async deleteProduct(id) {
+    return await this.Product.update(
+      {
+        isDeleted: 1,
+      },
+      {
+        where: { id: id },
+        returning: true,
+        plain: true,
+      }
+    ).catch((e) => e);
+  }
 }
 
 module.exports = ProductService;

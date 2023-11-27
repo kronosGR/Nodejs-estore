@@ -53,4 +53,17 @@ router.post('/', isAdmin, isValidUrl, async (req, res, next) => {
   return res.jsend.success({ data: { statusCode: 200, result: 'Product added' } });
 });
 
+router.delete('/:productId', async (req, res, next) => {
+  const productId = req.params.productId;
+  try {
+    const res = await productService.deleteProduct(productId);
+    if (res.name == 'SequelizeForeignKeyConstraintError') {
+      return next(createHttpError(500, 'The product is being used'));
+    }
+  } catch (error) {
+    return next(createHttpError(500, 'There was an error deleting the product'));
+  }
+  res.jsend.success({ statusCode: 200, result: 'Product deleted' });
+});
+
 module.exports = router;

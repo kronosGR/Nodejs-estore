@@ -177,7 +177,6 @@ async function getProducts(whereClause) {
       } else {
         showToast('No Products', 'Products found');
       }
-      console.log(products);
       hideSpinner();
     },
     error: function (err) {
@@ -311,6 +310,26 @@ async function productAdd() {
     error: function (err) {
       hideSpinner();
       hideModal('#modal-add');
+      showToast('Error', err.responseJSON.data.data);
+    },
+  });
+}
+
+async function productDelete(id) {
+  showSpinner();
+  $.ajax({
+    type: 'DELETE',
+    url: API_PRODUCTS_URL + `/${id}`,
+    contentType: 'Application/json',
+    dataType: 'json',
+    success: function (result) {
+      hideSpinner();
+      emptyContainer('#product-container');
+      showToast('Success', 'Product deleted!');
+      getProducts('');
+    },
+    error: function (err) {
+      hideSpinner();
       showToast('Error', err.responseJSON.data.data);
     },
   });
