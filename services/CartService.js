@@ -24,6 +24,15 @@ class CartService {
       include: [this.CartItem],
     }).catch((e) => e);
   }
+
+  async updateCartForUser(cartId, total) {
+    return this.Cart.update(
+      {
+        total: total,
+      },
+      { where: { id: cartId }, returning: true, plain: true }
+    ).catch((e) => e);
+  }
 }
 
 module.exports = CartService;

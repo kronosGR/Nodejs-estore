@@ -105,8 +105,9 @@ class UserService {
   async getUserDiscount(userId) {
     const user = await this.User.findOne({
       where: { id: userId },
+      include: this.Membership,
     });
-    return user.MembershipId;
+    return user.Membership;
   }
 
   async getItemsPurchased(userId) {
