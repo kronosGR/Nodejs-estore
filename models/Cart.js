@@ -3,6 +3,7 @@ module.exports = (sequelize, Sequelize) => {
     'Cart',
     {
       total: Sequelize.DataTypes.FLOAT,
+      isCheckedOut: Sequelize.DataTypes.BOOLEAN,
     },
     { timestamps: true }
   );
