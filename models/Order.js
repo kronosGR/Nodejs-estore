@@ -2,6 +2,7 @@ module.exports = (sequelize, Sequelize) => {
   const Order = sequelize.define('Order', {
     id: { type: Sequelize.DataTypes.UUID, primaryKey: true },
     total: Sequelize.DataTypes.FLOAT,
+    cartId: Sequelize.DataTypes.INTEGER,
   });
 
   Order.associate = function (models) {

@@ -4,7 +4,7 @@ class CartItemService {
   }
 
   async addItemToCart(CartId, productId, quantity, unitPrice) {
-    return this.CartItem.create({
+    return await this.CartItem.create({
       productId: productId,
       quantity: quantity,
       unitPrice: unitPrice,
@@ -12,10 +12,18 @@ class CartItemService {
     }).catch((e) => e);
   }
   async getItemFromCart(productId, CartId) {
-    return this.CartItem.findOne({
+    return await this.CartItem.findOne({
       where: {
         CartId: CartId,
         productId: productId,
+      },
+    }).catch((e) => e);
+  }
+
+  async getItemsFromCart(cartId) {
+    return await this.CartItem.findAll({
+      where: {
+        CartId: cartId,
       },
     }).catch((e) => e);
   }
@@ -37,9 +45,9 @@ class CartItemService {
     );
   }
 
-  async deleteCartItem(CartId, productId) {
+  async deleteCartItem(cartItemId) {
     return await this.CartItem.destroy({
-      where: { productId: productId, CartId: CartId },
+      where: { id: cartItemId },
     }).catch((e) => e);
   }
 }
