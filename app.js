@@ -2,12 +2,14 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+
 var logger = require('morgan');
 const jsend = require('jsend');
 const bodyParser = require('body-parser');
 require('dotenv').config();
 
 const isAdmin = require('./middleware/isAdmin');
+const isRegisteredUser = require('./middleware/isRegisteredUser');
 
 const db = require('./models');
 
@@ -22,7 +24,7 @@ const usersRouter = require('./routes/users');
 const membershipsRouter = require('./routes/memberships');
 const productsRouter = require('./routes/products');
 const cartRouter = require('./routes/carts');
-const isRegisteredUser = require('./middleware/isRegisteredUser');
+const checkoutRouter = require('./routes/checkout');
 
 var app = express();
 
@@ -52,6 +54,7 @@ app.use('/users', usersRouter);
 app.use('/memberships', membershipsRouter);
 app.use('/products', productsRouter);
 app.use('/carts', isRegisteredUser, cartRouter);
+app.use('/checkout', isRegisteredUser, checkoutRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

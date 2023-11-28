@@ -1,5 +1,6 @@
 class MembershipService {
   constructor(db) {
+    this.sequelize = db.sequelize;
     this.Membership = db.Membership;
   }
 
@@ -20,6 +21,13 @@ class MembershipService {
     return await this.Membership.findOne({
       where: { id: id },
     }).catch((e) => e);
+  }
+
+  async getMembershipWithItemsPurchased(amount) {
+    const queryString = `SELECT m.id, m.name, m.from, m.to, m.discount FROM memberships as m WHERE ${amount} BETWEEN m.from and m.to`;
+    return this.sequelize.query(queryString, {
+      type: this.sequelize.QueryTypes.SELECT,
+    });
   }
 
   async deleteMembership(id) {

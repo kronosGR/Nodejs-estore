@@ -12,7 +12,7 @@ class UserService {
     return await this.User.findAll({ include: [this.Role, this.Membership] });
   }
 
-  async getUserById(email) {
+  async getUserById(id) {
     return await this.User.findOne({
       where: { id: id },
     }).catch((e) => e);
@@ -68,6 +68,20 @@ class UserService {
     return await this.User.destroy({
       where: { id: id },
     }).catch((e) => e);
+  }
+
+  async updateUserMembershipAndItems(id, MembershipId, itemsPurchased) {
+    return await this.User.update(
+      {
+        itemsPurchased: itemsPurchased,
+        MembershipId: MembershipId,
+      },
+      {
+        where: { id: id },
+        returning: true,
+        plain: true,
+      }
+    );
   }
 
   async updateUser(

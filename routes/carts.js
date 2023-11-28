@@ -126,8 +126,8 @@ router.post('/:cartId/cartitem', async (req, res, next) => {
     return next(createHttpError(400, 'All fields are required'));
   }
   // check product quantity
-  const cQuantity = await productService.getProductQuantity(productId);
-  if (cQuantity <= 0) {
+  const cQuantity = await productService.getProduct(productId);
+  if (cQuantity.quantity <= 0) {
     return next(createHttpError(400, 'Product is out of stock'));
   }
 
