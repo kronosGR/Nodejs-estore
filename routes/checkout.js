@@ -37,14 +37,15 @@ router.post('/now/:cartId', async (req, res, next) => {
   }
 
   // check if the product quantity is enough
-  cartItems.forEach(async (item) => {
+  for (const item of cartItems) {
     const product = await productService.getProduct(item.productId);
     if (product.quantity < item.quantity) {
       return next(
         createHttpError(400, 'No enough stock for the product ' + product.name)
       );
     }
-  });
+  }
+
   // create new order with In progress id-1
   const orderId = crypto.randomBytes(4).toString('hex').toString(36);
   await orderService.addOrder(orderId, id, cart.total, cart.id, '1');
