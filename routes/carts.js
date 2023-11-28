@@ -17,67 +17,113 @@ const cartItemService = new CartItemService(db);
 const productService = new ProductService(db);
 const userService = new UserService(db);
 
-router.get('/:userId', async (req, res, next) => {
-  const userId = req.params.userId;
-  const cart = await cartService.getCartForUser(userId);
+// get carts
+router.get('/', async (req, res, next) => {
+  const token = req.cookies.token || '';
+  const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
+  const carts = await cartService.getCartsForUser(decodedToken.id);
+  if (!carts) {
+    return next(createHttpError(404, 'No carts found'));
+  }
+  return res.jsend.success({ data: { statusCode: 200, result: carts } });
+});
+
+// get specific cart
+router.get('/:cartId', async (req, res, next) => {
+  const cartId = req.params.cartId;
+  const token = req.cookies.token || '';
+  const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
+  const cart = await cartService.getCartForUser(decodedToken.id, cartId);
   if (!cart) {
     return next(createHttpError(404, 'No cart found'));
   }
   return res.jsend.success({ data: { statusCode: 200, result: cart } });
 });
 
-router.post('/:cartId', isRegisteredUser, async (req, res, next) => {
-  const cartId = req.params.cartId;
-  let { productId, quantity, unitPrice } = req.body;
+// add new cart
+router.post('/', async (req, res, next) => {
+  let { total, isCheckedOut } = req.body;
 
+  const token = req.cookies.token || '';
+  const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
+
+  if (isEmpty(total) || isEmpty(isCheckedOut)) {
+    return next(createHttpError(400, 'All fields are required'));
+  }
+
+  const ret = await cartService.addCart(decodedToken.id, total, isCheckedOut);
+  if (ret.errors) {
+    const errorMsg = ret.errors[0].message;
+    console.error(errorMsg);
+    return next(createHttpError(500, errorMsg));
+  }
+  return res.jsend.success({
+    data: { statusCode: 201, result: 'Cart added', data: ret },
+  });
+});
+
+router.delete('/:cartId', async (req, res, next) => {
+  const cartId = req.params.cartId;
+  try {
+    const res = await cartService.deleteCart(cartId);
+    if (res.name == 'SequelizeForeignKeyConstraintError') {
+      return next(createHttpError(500, 'The cart is being used'));
+    }
+  } catch (e) {
+    return next(createHttpError(500, 'There was an error deleting the cart'));
+  }
+  res.jsend.success({ statusCode: 200, result: 'Cart deleted' });
+});
+
+router.post('/:cartId/cartitem', async (req, res, next) => {
+  const cartId = req.params.cartId;
+  const { productId, quantity, unitPrice } = req.body;
   const token = req.cookies.token || '';
   const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
 
   if (isEmpty(productId) || isEmpty(quantity) || isEmpty(unitPrice)) {
     return next(createHttpError(400, 'All fields are required'));
   }
+  // check product quantity
+  const cQuantity = await productService.getProductQuantity(productId);
+  if (cQuantity <= 0) {
+    return next(createHttpError(400, 'Product is out of stock'));
+  }
 
   // get user discount
   const membership = await userService.getUserDiscount(decodedToken.id);
   const discount = membership.discount;
-
   // calculate the new item price
-  unitPrice = unitPrice - (unitPrice * discount) / 100;
+  let newUnitPrice = unitPrice - (unitPrice * discount) / 100;
 
   // add/update product to cartItem
   const cartItem = await cartItemService.getItemFromCart(productId, cartId);
   if (cartItem) {
     // increase by one quantity
-
+    let newQuantity = cartItem.quantity + quantity;
     const updatedCartItem = await cartItemService.updateItemInCart(
       cartId,
       productId,
       newQuantity,
-      unitPrice
+      newUnitPrice
     );
   } else {
     // add item to cart
-    await cartItemService.addItemToCart(cartId, productId, quantity, unitPrice);
+    await cartItemService.addItemToCart(cartId, productId, quantity, newUnitPrice);
   }
 
   // update cart total
-  const cart = await cartService.getCartForUser(decodedToken.id);
+  const cart = await cartService.getCartForUser(decodedToken.id, cartId);
+
   const cartItems = cart.CartItems;
   let total = 0;
   cartItems.forEach((item) => {
     total += item.quantity * item.unitPrice;
   });
-  const resp = await cartService.updateCartForUser(cartId, total);
+  await cartService.updateCartForUser(cartId, total);
   return res.jsend.success({
     data: { statusCode: 200, result: 'Item(s) added to cart' },
   });
 });
 
 module.exports = router;
-
-// check product quantity
-// const cQuantity = await productService.getProductQuantity(productId);
-// if (cQuantity >= quantity) {
-// } else {
-//   return next(createHttpError(400, 'Not enough items to add to the Cart'));
-// }

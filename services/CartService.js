@@ -5,31 +5,39 @@ class CartService {
     this.CartItem = db.CartItem;
   }
 
-  async addCart(userId) {
+  async addCart(userId, total, isCheckedOut) {
     return this.Cart.create({
-      total: 0,
+      total: total,
       UserId: userId,
-      isCheckedOut: false,
+      isCheckedOut: isCheckedOut,
     }).catch((e) => e);
   }
 
-  async getCartIdForUser(userId) {
-    return this.Cart.findOne({
-      where: { UserId: userId },
-    }).catch((e) => e);
-  }
-
-  async getCartForUser(userId) {
-    return this.Cart.findOne({
+  async getCartsForUser(userId) {
+    return this.Cart.findAll({
       where: { UserId: userId },
       include: [this.CartItem],
     }).catch((e) => e);
   }
 
-  async updateCartForUser(cartId, total) {
+  async getCartForUser(userId, cartId) {
+    return this.Cart.findOne({
+      where: { UserId: userId, id: cartId },
+      include: [this.CartItem],
+    }).catch((e) => e);
+  }
+
+  async deleteCart(cartId) {
+    await this.Cart.destror({
+      where: { id: cartId },
+    }).catch((e) => e);
+  }
+
+  async updateCartForUser(cartId, total, isCheckedOut) {
     return this.Cart.update(
       {
         total: total,
+        isCheckedOut: isCheckedOut,
       },
       { where: { id: cartId }, returning: true, plain: true }
     ).catch((e) => e);

@@ -114,9 +114,6 @@ router.post('/', isValidEmail, async (req, res, next) => {
     console.error(errorMsg);
     return next(createHttpError(500, errorMsg));
   }
-  const userId = ret.id;
-  // add cart for user
-  await cartService.addCart(userId);
 
   return res.jsend.success({ data: { statusCode: 200, result: 'User added' } });
 });

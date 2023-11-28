@@ -110,9 +110,6 @@ router.post('/register', isValidEmail, async (req, res, next) => {
     console.error(errorMsg);
     return next(createHttpError(409, r.errors[0].message));
   }
-  const userId = r.id;
-  // add cart for user
-  await cartService.addCart(userId);
 
   return res.jsend.success({
     data: { statusCode: 200, result: 'User account created' },
