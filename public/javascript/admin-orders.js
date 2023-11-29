@@ -10,8 +10,9 @@ async function getOrders() {
     url: API_ORDERS_URL + '/all',
     success: function (result) {
       const orders = result.data.data.result;
-      orders.forEach((order) => {
-        const row = `
+      if (orders.length > 0) {
+        orders.forEach((order) => {
+          const row = `
       <div class="d-flex flex-column">
         <div class="row px-3 py-1 w-100">
           <div class="col py-1 bg-light text-start">
@@ -56,15 +57,15 @@ async function getOrders() {
         </div>
        </div>
      `;
-        $('#order-container').append(row);
+          $('#order-container').append(row);
 
-        for (const orderItem of order.OrderItems) {
-          $.ajax({
-            type: 'GET',
-            url: API_PRODUCTS_URL + `/${orderItem.productId}`,
-            success: function (result) {
-              const product = result.data.data.result;
-              const row2 = `
+          for (const orderItem of order.OrderItems) {
+            $.ajax({
+              type: 'GET',
+              url: API_PRODUCTS_URL + `/${orderItem.productId}`,
+              success: function (result) {
+                const product = result.data.data.result;
+                const row2 = `
               <div class="row px-3 py-1 -1">
                 <div class="col-1 py-1 bg-light text-start w-350p">
                   ${product.name}
@@ -86,18 +87,20 @@ async function getOrders() {
                 />
               </div>`;
 
-              $(`#product-container-${order.id}`).append(row2);
-              console.log(orderItem);
-            },
-            error: function (err) {
-              hideSpinner();
-              console.log(err);
-              showToast('Error', err.responseJSON.data.data);
-            },
-          });
-        }
-      });
-
+                $(`#product-container-${order.id}`).append(row2);
+              },
+              error: function (err) {
+                hideSpinner();
+                console.log(err);
+                showToast('Error', err.responseJSON.data.data);
+              },
+            });
+          }
+        });
+      } else {
+        showToast('No Orders', 'No Orders found');
+        hideSpinner();
+      }
       hideSpinner();
     },
     error: function (err) {

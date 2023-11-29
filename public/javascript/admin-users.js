@@ -46,8 +46,9 @@ async function getUsers() {
     dataType: 'json',
     success: function (result) {
       const users = result.data.data.result;
-      users.forEach((user) => {
-        const row = `
+      if (users.length > 0) {
+        users.forEach((user) => {
+          const row = `
          <div class="row px-3 py-1 w-100" >
             <div class="col-1 py-2 bg-light" id="${user.id}-id">
               ${user.id}
@@ -75,8 +76,8 @@ async function getUsers() {
             </div>
             <div class="col-1 py-1 bg-light ">
               <div class="p-1 w-50 ${getColorClassForRole(user.Membership.name)}" id="${
-          user.id
-        }-membership">
+            user.id
+          }-membership">
               ${user.Membership.name}
               </div>
             </div>
@@ -95,8 +96,12 @@ async function getUsers() {
             </div>
           </div>
         `;
-        $('#user-container').append(row);
-      });
+          $('#user-container').append(row);
+        });
+      } else {
+        showToast('No Users', 'No Users found');
+        hideSpinner();
+      }
       hideSpinner();
     },
     error: function (err) {

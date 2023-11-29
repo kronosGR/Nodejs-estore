@@ -31,8 +31,9 @@ async function getCategories() {
     dataType: 'json',
     success: function (result) {
       const categories = result.data.data.result;
-      categories.forEach((category) => {
-        const row = `
+      if (categories.length > 0) {
+        categories.forEach((category) => {
+          const row = `
          <div class="row px-3 py-1 w-100">
             <div class="col py-1 bg-light">
               ${category.id}
@@ -47,8 +48,12 @@ async function getCategories() {
             </div>
           </div>
         `;
-        $('#category-container').append(row);
-      });
+          $('#category-container').append(row);
+        });
+      } else {
+        showToast('No Categories', 'No Categories found');
+        hideSpinner();
+      }
       hideSpinner();
     },
     error: function (err) {

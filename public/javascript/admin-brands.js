@@ -31,8 +31,9 @@ async function getBrands() {
     dataType: 'json',
     success: function (result) {
       const brands = result.data.data.result;
-      brands.forEach((brand) => {
-        const row = `
+      if (brands.length > 0) {
+        brands.forEach((brand) => {
+          const row = `
          <div class="row px-3 py-1 w-100">
             <div class="col py-1 bg-light">
               ${brand.id}
@@ -47,8 +48,12 @@ async function getBrands() {
             </div>
           </div>
         `;
-        $('#brand-container').append(row);
-      });
+          $('#brand-container').append(row);
+        });
+      } else {
+        showToast('No Brands', 'No Brands found');
+        hideSpinner();
+      }
       hideSpinner();
     },
     error: function (err) {

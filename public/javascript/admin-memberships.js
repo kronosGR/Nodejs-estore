@@ -11,8 +11,9 @@ async function getMemberships() {
     dataType: 'json',
     success: function (result) {
       const memberships = result.data.data.result;
-      memberships.forEach((membership) => {
-        const row = `
+      if (memberships.length > 0) {
+        memberships.forEach((membership) => {
+          const row = `
          <div class="row px-3 py-1 w-100">
             <div class="col py-1 bg-light text-start">
               ${membership.id}
@@ -36,8 +37,12 @@ async function getMemberships() {
             </div>
           </div>
         `;
-        $('#membership-container').append(row);
-      });
+          $('#membership-container').append(row);
+        });
+      } else {
+        showToast('No Memberships', 'No Memberships found');
+        hideSpinner();
+      }
       hideSpinner();
     },
     error: function (err) {

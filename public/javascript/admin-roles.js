@@ -31,8 +31,9 @@ async function getRoles() {
     dataType: 'json',
     success: function (result) {
       const roles = result.data.data.result;
-      roles.forEach((role) => {
-        const row = `
+      if (roles.length > 0) {
+        roles.forEach((role) => {
+          const row = `
          <div class="row px-3 py-1 w-100">
             <div class="col py-1 bg-light">
               ${role.id}
@@ -48,8 +49,12 @@ async function getRoles() {
             </div>
           </div>
         `;
-        $('#role-container').append(row);
-      });
+          $('#role-container').append(row);
+        });
+      } else {
+        showToast('No Roles', 'No Roles found');
+        hideSpinner();
+      }
       hideSpinner();
     },
     error: function (err) {
