@@ -147,7 +147,7 @@ function showUpdateForm(id, orderStatusId) {
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" onclick ="orderUpdate(${id},'${id}')" >Update</button>
+          <button type="button" class="btn btn-primary" onclick ="orderUpdate('${id}')" >Update</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick='hideModal("#modal-update")'>Close</button>
         </div>
       </div>
@@ -165,4 +165,34 @@ function showUpdateForm(id, orderStatusId) {
     $('#status-select').append(option);
   });
   showModal('#modal-update');
+}
+
+function orderUpdate(id) {
+  showSpinner();
+  const OrderStatusId = $('#status-select option:selected').val();
+
+  const data = JSON.stringify({
+    OrderStatusId: OrderStatusId,
+  });
+
+  $.ajax({
+    type: 'PUT',
+    url: API_ORDERS_URL + `/${id}`,
+    data: data,
+    contentType: 'Application/json',
+    dataType: 'json',
+    success: function (result) {
+      hideSpinner();
+      hideModal('#modal-update');
+      emptyContainer('#order-container');
+      showToast('Success', 'Order updated');
+      getOrders();
+    },
+    error: function (err) {
+      hideSpinner();
+      hideModal('#modal-update');
+      showToast('Error', err.responseJSON.data.data);
+    },
+  });
+  console.log(OrderStatusId);
 }
