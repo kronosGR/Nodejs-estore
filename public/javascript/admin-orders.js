@@ -1,8 +1,25 @@
+let statuses;
+
 $(async function () {
   hideSpinner();
   await getOrders();
+  await getOrderStatus();
 });
 
+async function getOrderStatus() {
+  $.ajax({
+    type: 'GET',
+    url: API_ORDERS_STATUS_URL,
+    contentType: 'Application/json',
+    success: function (result) {
+      statuses = result.data.data.result;
+      console.log(statuses);
+    },
+    error: function (error) {
+      console.log(error);
+    },
+  });
+}
 async function getOrders() {
   showSpinner();
   $.ajax({
@@ -31,7 +48,7 @@ async function getOrders() {
             ${order.OrderStatus.name}
           </div>
           <div class="col py-1 bg-light text-start ">          
-            <button id="brand-edit" title="Update Order status" class="btn btn-danger" onclick="showUpdateForm(${order.id},'${order.OrderStatusId}')"><i class="bi bi-pencil"></i></button>
+            <button id="brand-edit" title="Update Order status" class="btn btn-danger" onclick="showUpdateForm('${order.id}','${order.OrderStatusId}')"><i class="bi bi-pencil"></i></button>
             <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseProducts-${order.id}" 
               aria-expanded="false" aria-controls="collapseProducts-${order.id}">
                 Show Items
@@ -109,4 +126,43 @@ async function getOrders() {
       showToast('Error', err.responseJSON.data.data);
     },
   });
+}
+function showUpdateForm(id, orderStatusId) {
+  const modalUpdate = `
+    <div class="modal" tabindex="-1" role="dialog" id="modal-update" data-bs-backdrop="static" 
+    data-bs-keyboard="false">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Order Status</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"  onclick='hideModal("#modal-update")'>
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+        <div class="mb-3 d-flex flex-column text-start">
+            <label for="status-select" class="form-label">Order Status</label>
+            <select class="form-select" name="status-select" aria-label=".form-select-lg example" id="status-select">  
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" onclick ="orderUpdate(${id},'${id}')" >Update</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick='hideModal("#modal-update")'>Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+`;
+
+  $('#order-container').append(modalUpdate);
+
+  statuses.forEach((status) => {
+    const option = $(`
+      <option value="${status.id}" ${status.id === orderStatusId ? 'selected' : ''}>
+      ${status.name}</option>
+    `);
+    $('#status-select').append(option);
+  });
+  showModal('#modal-update');
 }

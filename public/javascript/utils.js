@@ -7,6 +7,7 @@ const API_ROLE_URL = API_URL + '/roles';
 const API_USERS_URL = API_URL + '/users';
 const API_PRODUCTS_URL = API_URL + '/products';
 const API_ORDERS_URL = API_URL + '/orders';
+const API_ORDERS_STATUS_URL = API_URL + '/orderstatuses';
 
 function showToast(title, message) {
   $('#toast-title').text(title);
