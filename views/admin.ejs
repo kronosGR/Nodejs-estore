@@ -15,7 +15,7 @@
   <div class="container-fluid mt-5 text-center p-0">
     <%- include('./partials/navbar.ejs') %>
 
-    <div class="container-fluid mt-5 bg-white">
+    <div class="container-fluid mt-5 bg-white p-1">
       <div class="d-flex justify-content-between align-items-center  ">
         <h2 class="p-3 text-center">Products</i></h2>
 
@@ -27,23 +27,28 @@
         </div>
         <div class="col-2 d-flex flex-column text-start ">
           <label for="category-select" class="form-label">Category</label>
-          <select class="form-select" name="category-select" aria-label=".form-select-lg" id="category-select">
+          <select class="form-select" name="category-select"
+            aria-label=".form-select-lg" id="category-select">
             <option value="0">None</option>
           </select>
         </div>
         <div class="col-2 d-flex flex-column text-start ">
           <label for="brands-select" class="form-label">Brands</label>
-          <select class="form-select" name="brands-select" aria-label=".form-select-lg" id="brands-select">
+          <select class="form-select" name="brands-select"
+            aria-label=".form-select-lg" id="brands-select">
             <option value="0">None</option>
           </select>
         </div>
         <div class="col-2"></div>
         <div class="col-2">
-          <button type="button" class="btn btn-success" onclick="search()">Search</button>
-          <button type="button" class="btn btn-warning" onclick="clearSearch()">Clear</button>
+          <button type="button" class="btn btn-success"
+            onclick="search()">Search</button>
+          <button type="button" class="btn btn-warning"
+            onclick="clearSearch()">Clear</button>
         </div>
         <div class=" col-2">
-          <button class="btn btn-success" onclick="showAddProductForm()"><i class="bi bi-plus-square"></i> Add
+          <button class="btn btn-success" onclick="showAddProductForm()"><i
+              class="bi bi-plus-square"></i> Add
             Product</button>
         </div>
       </div>

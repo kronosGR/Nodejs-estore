@@ -13,7 +13,6 @@ async function getOrderStatus() {
     contentType: 'Application/json',
     success: function (result) {
       statuses = result.data.data.result;
-      console.log(statuses);
     },
     error: function (error) {
       console.log(error);
