@@ -21,7 +21,6 @@ const membershipService = new MembershipService(db);
 
 // TODO
 
-// A user must be able to view their orders.
 // An endpoint is required for the Admin users to change the status of an order.
 
 router.post('/now/:cartId', async (req, res, next) => {

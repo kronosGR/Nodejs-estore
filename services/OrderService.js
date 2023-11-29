@@ -22,6 +22,28 @@ class OrderService {
       include: [this.OrderItem],
     }).catch((e) => e);
   }
+
+  async getAllOrdersForUser(userId) {
+    return await this.Order.findAll({
+      where: { UserId: userId },
+      include: [this.OrderItem],
+    }).catch((e) => e);
+  }
+
+  async changeOrderStatus(orderId, orderStatusId) {
+    return await this.Order.update(
+      {
+        OrderStatusId: orderStatusId,
+      },
+      {
+        where: {
+          id: orderId,
+        },
+        returning: true,
+        plain: true,
+      }
+    ).catch((e) => e);
+  }
 }
 
 module.exports = OrderService;
