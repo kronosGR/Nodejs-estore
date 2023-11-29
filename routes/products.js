@@ -10,6 +10,12 @@ const createHttpError = require('http-errors');
 const productService = new ProductService(db);
 const router = express.Router();
 
+router.get('/:productId', async (req, res, next) => {
+  const productId = req.params.productId;
+  const product = await productService.getProduct(productId);
+  return res.jsend.success({ data: { statusCode: 200, result: product } });
+});
+
 router.post('/', async (req, res, next) => {
   let { searchOptions } = req.body;
   console.log(searchOptions);

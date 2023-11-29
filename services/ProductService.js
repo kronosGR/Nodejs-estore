@@ -2,6 +2,8 @@ class ProductService {
   constructor(db) {
     this.Product = db.Product;
     this.sequelize = db.sequelize;
+    this.Category = db.Category;
+    this.Brand = db.Brand;
   }
 
   async addProduct(
@@ -56,6 +58,7 @@ class ProductService {
   async getProduct(productId) {
     const product = await this.Product.findOne({
       where: { id: productId },
+      include: [this.Category, this.Brand],
     });
     return product;
   }

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%- include('./partials/head.ejs') %>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Orders</title>
+</head>
+
+<body>
+  <div class="container-fluid mt-5 text-center p-2">
+    <%- include('./partials/navbar.ejs') %>
+
+    <div class="container-fluid mt-5 bg-white">
+      <div class="d-flex justify-content-between align-items-center  ">
+        <h2 class="p-3 text-center">Orders</i></h2>
+
+      </div>
+
+      <div class="card mt-2">
+        <div class="card-header text-start">
+          Current Orders
+        </div>
+        <div class="list-group scrollable">
+          <div class="row px-3 py-1 w-100">
+            <div class="col py-1 text-start ">Id</div>
+            <div class="col py-1 text-start ">Created</div>
+            <div class="col py-1 text-start ">Updated</div>
+            <div class="col py-1 text-start ">UserId</div>
+            <div class="col py-1 text-start ">Order Status</div>
+            <div class="col py-1 ">Options</div>
+          </div>
+          <div id="order-container">
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  <%- include('partials/extras.ejs') %>
+  <%- include('./partials/scripts.ejs') %>
+  <script src="/javascript/admin-orders.js"></script>
+</body>
+
+</html>

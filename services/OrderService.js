@@ -4,6 +4,7 @@ class OrderService {
   constructor(db) {
     this.Order = db.Order;
     this.OrderItem = db.OrderItem;
+    this.OrderStatus = db.OrderStatus;
   }
 
   async addOrder(orderId, UserId, total, cartId, OrderStatusId) {
@@ -19,7 +20,7 @@ class OrderService {
 
   async getAllOrders() {
     return await this.Order.findAll({
-      include: [this.OrderItem],
+      include: [this.OrderItem, this.OrderStatus],
     }).catch((e) => e);
   }
 

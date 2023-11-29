@@ -26,6 +26,10 @@ router.get('/users', (req, res, next) => {
   res.render('admin-users');
 });
 
+router.get('/orders', (req, res, next) => {
+  res.render('admin-orders');
+});
+
 router.get('/logout', (req, res, next) => {
   res.clearCookie('token');
   res.redirect('/');
