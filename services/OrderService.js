@@ -3,6 +3,7 @@ const { Sequelize } = require('sequelize');
 class OrderService {
   constructor(db) {
     this.Order = db.Order;
+    this.OrderItem = db.OrderItem;
   }
 
   async addOrder(orderId, UserId, total, cartId, OrderStatusId) {
@@ -14,6 +15,12 @@ class OrderService {
       UserId: UserId,
     }).catch((e) => e);
     return order.id;
+  }
+
+  async getAllOrders() {
+    return await this.Order.findAll({
+      include: [this.OrderItem],
+    }).catch((e) => e);
   }
 }
 
