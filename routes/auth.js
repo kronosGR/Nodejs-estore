@@ -16,6 +16,18 @@ const userService = new UserService(db);
 const cartService = new CartService(db);
 
 router.post('/login', async (req, res, next) => {
+  // #swagger.tags = ['Auth']
+  // #swagger.description = "Login for a user"
+  // #swagger.produces = ['text/json']
+  // #swagger.responses = [200,400, 401, 500]
+  /* #swagger.parameters['body']={
+    "name":"body",
+    "in":"body",
+    "schema":{
+      $ref:"#/definitions/Login"
+    }
+  }
+  */
   const { emailOrUsername, password } = req.body;
   if (emailOrUsername == null || password == null) {
     return next(createHttpError(400, 'All fields are required'));
@@ -66,6 +78,19 @@ router.post('/login', async (req, res, next) => {
 });
 
 router.post('/register', isValidEmail, async (req, res, next) => {
+  // #swagger.tags=['Auth']
+  // #swagger.description = "Sign up for new user"
+  // #swagger.produces = ['text/json']
+  // #swagger.responses=[200,400,409]
+  /*
+    #swagger.parameters['body']={
+      "name":"body",
+      "in":"body",
+      "schema":{
+        $ref: "#/definitions/SignUp"
+      }
+    }
+  */
   const {
     firstName,
     lastName,

@@ -2,6 +2,8 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+const swaggerUi = require('swagger-ui-express');
+const swaggerFile = require('./swagger-output.json');
 
 var logger = require('morgan');
 const jsend = require('jsend');
@@ -32,9 +34,13 @@ var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
+app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile));
+
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.json());
+app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile));
+
 app.use(jsend.middleware);
 
 app.use(logger('dev'));
