@@ -9,11 +9,36 @@ const brandService = new BrandService(db);
 const router = express.Router();
 
 router.get('/', async (req, res, next) => {
+  // #swagger.tags = ['Brands']
+  // #swagger.description = "Get All Brands"
+  // #swagger.produces = ['text/json']
+  // #swagger.responses = [200]
   const brands = await brandService.getAllBrands();
   return res.jsend.success({ data: { statusCode: 200, result: brands } });
 });
 
 router.delete('/:brandId', isAdmin, async (req, res, next) => {
+  // #swagger.tags = ['Brands']
+  // #swagger.description = "Delete a Brand"
+  // #swagger.produces = ['text/json']
+  /* #swagger.parameters['brandId']={
+      in: 'path',
+      description: 'Brand Id',
+      name : 'brandId',
+      type: 'number',
+      example:1
+     } 
+     #swagger.responses[200] = {
+      description: 'Brand deleted',
+    }
+     #swagger.responses[404] = {
+      description: 'Not found',
+    }
+     #swagger.responses[500] = {
+      description: 'The brand is being used',
+    }
+    */
+
   const brandId = req.params.brandId;
   try {
     const res = await brandService.deleteBrand(brandId);
@@ -27,6 +52,27 @@ router.delete('/:brandId', isAdmin, async (req, res, next) => {
 });
 
 router.post('/', isAdmin, async (req, res, next) => {
+  // #swagger.tags = ['Brands']
+  // #swagger.description = "Add a Brand"
+  // #swagger.produces = ['text/json']
+  /* #swagger.parameters['body']={
+      in: 'body',
+       schema: {
+                $name: 'Apple',
+            }
+     } 
+     #swagger.responses[201] = {
+      schema: {
+                id:1,
+                name: 'Apple',
+            }
+    }
+     #swagger.responses[400] = {
+      description: 'Name is required',
+    }
+     #swagger.responses[500] = {
+    }
+    */
   const { name } = req.body;
   if (name == null || name.length == 0)
     return next(createHttpError(400, 'Name is required'));
@@ -41,6 +87,31 @@ router.post('/', isAdmin, async (req, res, next) => {
 });
 
 router.put('/:brandId', isAdmin, async (req, res, next) => {
+  // #swagger.tags = ['Brands']
+  // #swagger.description = "Edit a Brand"
+  // #swagger.produces = ['text/json']
+  /*  #swagger.parameters['brandId']={
+      in: 'path',
+      description: 'Brand Id',
+      name : 'brandId',
+      type: 'number',
+      example:1
+     } 
+     #swagger.parameters['body']={
+      in: 'body',
+       schema: {
+                $name: 'Apple',
+            }
+     } 
+     #swagger.responses[200] = {
+      description: 'Brand Updated'
+    }
+     #swagger.responses[400] = {
+      description: 'Name is required',
+    }
+     #swagger.responses[500] = {
+    }
+    */
   const brandId = req.params.brandId;
   const { name } = req.body;
   if (name == null || name.length == 0)

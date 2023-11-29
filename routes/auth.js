@@ -19,7 +19,6 @@ router.post('/login', async (req, res, next) => {
   // #swagger.tags = ['Auth']
   // #swagger.description = "Login for a user"
   // #swagger.produces = ['text/json']
-  // #swagger.responses = [200,400, 401, 500]
   /* #swagger.parameters['body']={
     "name":"body",
     "in":"body",
@@ -27,6 +26,19 @@ router.post('/login', async (req, res, next) => {
       $ref:"#/definitions/Login"
     }
   }
+    #swagger.responses[200] = {
+      description: 'You are logged in',
+      schema: {
+                $token: '34r234g32443vt4bg',
+            }
+    }
+     #swagger.responses[401] = {
+      description: 'Incorrect email/username or password'
+    }
+     #swagger.responses[500] = {
+      description: 'Something went wrong with JWT token creation'
+    }
+    
   */
   const { emailOrUsername, password } = req.body;
   if (emailOrUsername == null || password == null) {
@@ -81,7 +93,6 @@ router.post('/register', isValidEmail, async (req, res, next) => {
   // #swagger.tags=['Auth']
   // #swagger.description = "Sign up for new user"
   // #swagger.produces = ['text/json']
-  // #swagger.responses=[200,400,409]
   /*
     #swagger.parameters['body']={
       "name":"body",
@@ -89,6 +100,11 @@ router.post('/register', isValidEmail, async (req, res, next) => {
       "schema":{
         $ref: "#/definitions/SignUp"
       }
+    }
+      #swagger.responses[200] = {
+      description: 'User account created'
+    }
+     #swagger.responses[409] = {
     }
   */
   const {

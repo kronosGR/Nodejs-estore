@@ -56,8 +56,29 @@
           }
         ],
         "responses": {
-          "200,400, 401, 500": {
-            "description": ""
+          "200": {
+            "description": "You are logged in",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "token": {
+                  "type": "string",
+                  "example": "34r234g32443vt4bg"
+                }
+              },
+              "required": [
+                "token"
+              ],
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Incorrect email/username or password"
+          },
+          "500": {
+            "description": "Something went wrong with JWT token creation"
           }
         }
       }
@@ -81,8 +102,11 @@
           }
         ],
         "responses": {
-          "200,400,409": {
-            "description": ""
+          "200": {
+            "description": "User account created"
+          },
+          "409": {
+            "description": "Conflict"
           }
         }
       }
@@ -217,15 +241,27 @@
     },
     "/brands/": {
       "get": {
-        "description": "",
+        "tags": [
+          "Brands"
+        ],
+        "description": "Get All Brands",
+        "produces": [
+          "text/json"
+        ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
           }
         }
       },
       "post": {
-        "description": "",
+        "tags": [
+          "Brands"
+        ],
+        "description": "Add a Brand",
+        "produces": [
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "user-agent",
@@ -239,28 +275,62 @@
               "type": "object",
               "properties": {
                 "name": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Apple"
                 }
-              }
+              },
+              "required": [
+                "name"
+              ]
             }
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "201": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Apple"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
+            "description": "Created"
+          },
+          "400": {
+            "description": "Name is required"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
     "/brands/{brandId}": {
       "delete": {
-        "description": "",
+        "tags": [
+          "Brands"
+        ],
+        "description": "Delete a Brand",
+        "produces": [
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "brandId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "number",
+            "description": "Brand Id",
+            "example": 1
           },
           {
             "name": "user-agent",
@@ -269,19 +339,33 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "Brand deleted"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "The brand is being used"
           }
         }
       },
       "put": {
-        "description": "",
+        "tags": [
+          "Brands"
+        ],
+        "description": "Edit a Brand",
+        "produces": [
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "brandId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "number",
+            "description": "Brand Id",
+            "example": 1
           },
           {
             "name": "user-agent",
@@ -295,15 +379,25 @@
               "type": "object",
               "properties": {
                 "name": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Apple"
                 }
-              }
+              },
+              "required": [
+                "name"
+              ]
             }
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "Brand Updated"
+          },
+          "400": {
+            "description": "Name is required"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
