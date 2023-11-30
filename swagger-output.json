@@ -1993,7 +1993,13 @@
     },
     "/orders/all": {
       "get": {
-        "description": "",
+        "tags": [
+          "Orders"
+        ],
+        "description": "Get All Orders for all users",
+        "produces": [
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "user-agent",
@@ -2002,31 +2008,283 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "statusCode": {
+                          "type": "number",
+                          "example": 200
+                        },
+                        "result": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "example": "bda97690"
+                              },
+                              "total": {
+                                "type": "number",
+                                "example": 207
+                              },
+                              "cartId": {
+                                "type": "number",
+                                "example": 1
+                              },
+                              "createdAt": {
+                                "type": "string",
+                                "example": "2023-11-28T17:21:50.000Z"
+                              },
+                              "updatedAt": {
+                                "type": "string",
+                                "example": "2023-11-29T11:08:19.000Z"
+                              },
+                              "OrderStatusId": {
+                                "type": "number",
+                                "example": 1
+                              },
+                              "UserId": {
+                                "type": "number",
+                                "example": 2
+                              },
+                              "OrderItems": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "number",
+                                      "example": 40
+                                    },
+                                    "productId": {
+                                      "type": "number",
+                                      "example": 1
+                                    },
+                                    "quantity": {
+                                      "type": "number",
+                                      "example": 2
+                                    },
+                                    "unitPrice": {
+                                      "type": "number",
+                                      "example": 69
+                                    },
+                                    "createdAt": {
+                                      "type": "string",
+                                      "example": "2023-11-28T17:21:50.000Z"
+                                    },
+                                    "updatedAt": {
+                                      "type": "string",
+                                      "example": "2023-11-28T17:21:50.000Z"
+                                    },
+                                    "OrderId": {
+                                      "type": "string",
+                                      "example": "bda97690"
+                                    }
+                                  }
+                                }
+                              },
+                              "OrderStatus": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "number",
+                                    "example": 1
+                                  },
+                                  "name": {
+                                    "type": "string",
+                                    "example": "In Progress"
+                                  },
+                                  "createdAt": {
+                                    "type": "string",
+                                    "example": "2023-11-28T15:59:06.000Z"
+                                  },
+                                  "updatedAt": {
+                                    "type": "string",
+                                    "example": "2023-11-28T15:59:06.000Z"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
+            "description": "OK"
           }
         }
       }
     },
     "/orders/": {
       "get": {
-        "description": "",
+        "tags": [
+          "Orders"
+        ],
+        "description": "Get All Orders for a user",
+        "produces": [
+          "text/json"
+        ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "statusCode": {
+                          "type": "number",
+                          "example": 200
+                        },
+                        "result": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "example": "bda97690"
+                              },
+                              "total": {
+                                "type": "number",
+                                "example": 207
+                              },
+                              "cartId": {
+                                "type": "number",
+                                "example": 1
+                              },
+                              "createdAt": {
+                                "type": "string",
+                                "example": "2023-11-28T17:21:50.000Z"
+                              },
+                              "updatedAt": {
+                                "type": "string",
+                                "example": "2023-11-29T11:08:19.000Z"
+                              },
+                              "OrderStatusId": {
+                                "type": "number",
+                                "example": 1
+                              },
+                              "UserId": {
+                                "type": "number",
+                                "example": 2
+                              },
+                              "OrderItems": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "number",
+                                      "example": 40
+                                    },
+                                    "productId": {
+                                      "type": "number",
+                                      "example": 1
+                                    },
+                                    "quantity": {
+                                      "type": "number",
+                                      "example": 2
+                                    },
+                                    "unitPrice": {
+                                      "type": "number",
+                                      "example": 69
+                                    },
+                                    "createdAt": {
+                                      "type": "string",
+                                      "example": "2023-11-28T17:21:50.000Z"
+                                    },
+                                    "updatedAt": {
+                                      "type": "string",
+                                      "example": "2023-11-28T17:21:50.000Z"
+                                    },
+                                    "OrderId": {
+                                      "type": "string",
+                                      "example": "bda97690"
+                                    }
+                                  }
+                                }
+                              },
+                              "OrderStatus": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "number",
+                                    "example": 1
+                                  },
+                                  "name": {
+                                    "type": "string",
+                                    "example": "In Progress"
+                                  },
+                                  "createdAt": {
+                                    "type": "string",
+                                    "example": "2023-11-28T15:59:06.000Z"
+                                  },
+                                  "updatedAt": {
+                                    "type": "string",
+                                    "example": "2023-11-28T15:59:06.000Z"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
+            "description": "OK"
           }
         }
       }
     },
     "/orders/{orderId}": {
       "put": {
-        "description": "",
+        "tags": [
+          "Orders"
+        ],
+        "description": "Change Order status",
+        "produces": [
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "orderId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Order Id",
+            "example": 1
           },
           {
             "name": "user-agent",
@@ -2040,15 +2298,52 @@
               "type": "object",
               "properties": {
                 "OrderStatusId": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "2"
                 }
               }
             }
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "statusCode": {
+                          "type": "number",
+                          "example": 200
+                        },
+                        "result": {
+                          "type": "string",
+                          "example": "Order updated"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "description": "Order Status is required"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
