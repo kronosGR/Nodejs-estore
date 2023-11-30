@@ -41,14 +41,12 @@ router.delete('/:categoryId', isAdmin, async (req, res, next) => {
   // #swagger.description = "Delete a category"
   // #swagger.produces = ['text/json']
   /* #swagger.parameters['categoryId']={
-    schema:{
         in: 'path',
         description: 'Category Id',
         name : 'categoryId',
         type: 'number',
         example:1
       } 
-    }
      #swagger.responses[200] = {
       description: 'Category deleted',
     }

@@ -269,13 +269,20 @@ router.post('/:cartId/cartitem', async (req, res, next) => {
   // #swagger.description = "Add a Cart Item"
   // #swagger.produces = ['text/json']
   /* #swagger.parameters['body']={
-      in: 'body',
+       in: 'body',
        schema: {
           "productId": 2,
           "quantity":1,
           "unitPrice": 69
         }
      } 
+      #swagger.parameters['cartId']={
+        in: 'path',
+        description: 'Cart Id',
+        name : 'cartId',
+        type: 'number',
+        example:1
+      } 
      #swagger.responses[200] = {
       description: 'Item(s) added to cart'
     }

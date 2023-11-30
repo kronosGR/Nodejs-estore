@@ -707,32 +707,9 @@
             "name": "categoryId",
             "in": "path",
             "required": true,
-            "type": "string",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "in": {
-                  "type": "string",
-                  "example": "path"
-                },
-                "description": {
-                  "type": "string",
-                  "example": "Category Id"
-                },
-                "name": {
-                  "type": "string",
-                  "example": "categoryId"
-                },
-                "type": {
-                  "type": "string",
-                  "example": "number"
-                },
-                "example": {
-                  "type": "number",
-                  "example": 1
-                }
-              }
-            }
+            "type": "number",
+            "description": "Category Id",
+            "example": 1
           },
           {
             "name": "user-agent",
@@ -828,15 +805,77 @@
     },
     "/roles/": {
       "get": {
-        "description": "",
+        "tags": [
+          "Roles"
+        ],
+        "description": "Get All Roles",
+        "produces": [
+          "text/json"
+        ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "statusCode": {
+                          "type": "number",
+                          "example": 200
+                        },
+                        "result": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number",
+                                "example": 2
+                              },
+                              "name": {
+                                "type": "string",
+                                "example": "User"
+                              },
+                              "createdAt": {
+                                "type": "string",
+                                "example": "2023-11-28T15:59:06.000Z"
+                              },
+                              "updatedAt": {
+                                "type": "string",
+                                "example": "2023-11-28T15:59:06.000Z"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
+            "description": "OK"
           }
         }
       },
       "post": {
-        "description": "",
+        "tags": [
+          "Roles"
+        ],
+        "description": "Add a Role",
+        "produces": [
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "user-agent",
@@ -850,28 +889,90 @@
               "type": "object",
               "properties": {
                 "name": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Super user"
                 }
               }
             }
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "201": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "statusCode": {
+                          "type": "number",
+                          "example": 201
+                        },
+                        "result": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "number",
+                              "example": 7
+                            },
+                            "name": {
+                              "type": "string",
+                              "example": "Super user"
+                            },
+                            "updatedAt": {
+                              "type": "string",
+                              "example": "2023-11-30T07:37:23.428Z"
+                            },
+                            "createdAt": {
+                              "type": "string",
+                              "example": "2023-11-30T07:37:23.428Z"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
+            "description": "Created"
+          },
+          "400": {
+            "description": "Name is required"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
     "/roles/{roleId}": {
       "delete": {
-        "description": "",
+        "tags": [
+          "Roles"
+        ],
+        "description": "Delete a Role",
+        "produces": [
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "roleId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "number",
+            "description": "Role Id",
+            "example": "1"
           },
           {
             "name": "user-agent",
@@ -880,19 +981,33 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "Role deleted"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "The Role is being used"
           }
         }
       },
       "put": {
-        "description": "",
+        "tags": [
+          "Roles"
+        ],
+        "description": "Edit a Role",
+        "produces": [
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "roleId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "number",
+            "description": "Role Id",
+            "example": 1
           },
           {
             "name": "user-agent",
@@ -906,15 +1021,52 @@
               "type": "object",
               "properties": {
                 "name": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "User"
                 }
               }
             }
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "statusCode": {
+                          "type": "number",
+                          "example": 200
+                        },
+                        "result": {
+                          "type": "string",
+                          "example": "Role updated"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "description": "Name is required"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
@@ -1220,32 +1372,9 @@
             "name": "membershipId",
             "in": "path",
             "required": true,
-            "type": "string",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "in": {
-                  "type": "string",
-                  "example": "path"
-                },
-                "description": {
-                  "type": "string",
-                  "example": "Membership Id"
-                },
-                "name": {
-                  "type": "string",
-                  "example": "membershipId"
-                },
-                "type": {
-                  "type": "string",
-                  "example": "number"
-                },
-                "example": {
-                  "type": "number",
-                  "example": 1
-                }
-              }
-            }
+            "type": "number",
+            "description": "Membership Id",
+            "example": 1
           },
           {
             "name": "user-agent",
@@ -1353,32 +1482,9 @@
             "name": "productId",
             "in": "path",
             "required": true,
-            "type": "string",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "in": {
-                  "type": "string",
-                  "example": "path"
-                },
-                "description": {
-                  "type": "string",
-                  "example": "Product Id"
-                },
-                "name": {
-                  "type": "string",
-                  "example": "productId"
-                },
-                "type": {
-                  "type": "string",
-                  "example": "number"
-                },
-                "example": {
-                  "type": "number",
-                  "example": 1
-                }
-              }
-            }
+            "type": "number",
+            "description": "Product Id",
+            "example": 1
           }
         ],
         "responses": {
@@ -1517,32 +1623,9 @@
             "name": "productId",
             "in": "path",
             "required": true,
-            "type": "string",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "in": {
-                  "type": "string",
-                  "example": "path"
-                },
-                "description": {
-                  "type": "string",
-                  "example": "Product Id"
-                },
-                "name": {
-                  "type": "string",
-                  "example": "productId"
-                },
-                "type": {
-                  "type": "string",
-                  "example": "number"
-                },
-                "example": {
-                  "type": "number",
-                  "example": 1
-                }
-              }
-            }
+            "type": "number",
+            "description": "Product Id",
+            "example": 1
           },
           {
             "name": "user-agent",
@@ -2203,7 +2286,9 @@
             "name": "cartId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "number",
+            "description": "Cart Id",
+            "example": 1
           },
           {
             "name": "body",

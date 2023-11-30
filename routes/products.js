@@ -15,13 +15,11 @@ router.get('/:productId', async (req, res, next) => {
   // #swagger.description = "Get a product"
   // #swagger.produces = ['text/json']
   /*  #swagger.parameters['productId']={
-      schema:{
           in: 'path',
           description: 'Product Id',
           name : 'productId',
           type: 'number',
           example:1
-        } 
       }
       #swagger.responses [200] = {
         schema:{
@@ -242,13 +240,11 @@ router.delete('/:productId', isAdmin, async (req, res, next) => {
   // #swagger.description = "Update a Product"
   // #swagger.produces = ['text/json']
   /* #swagger.parameters['productId']={
-    schema:{
         in: 'path',
         description: 'Product Id',
         name : 'productId',
         type: 'number',
         example:1
-      } 
     }
     
      #swagger.responses[200] = {

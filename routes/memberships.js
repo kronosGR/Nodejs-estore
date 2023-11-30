@@ -41,13 +41,11 @@ router.delete('/:membershipId', isAdmin, async (req, res, next) => {
   // #swagger.description = "Delete a Membership"
   // #swagger.produces = ['text/json']
   /* #swagger.parameters['membershipId']={
-    schema:{
         in: 'path',
         description: 'Membership Id',
         name : 'membershipId',
         type: 'number',
         example:1
-      } 
     }
      #swagger.responses[200] = {
       description: 'Membership deleted',
