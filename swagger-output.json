@@ -1055,15 +1055,77 @@
     },
     "/memberships/": {
       "get": {
-        "description": "",
+        "tags": [
+          "Memberships"
+        ],
+        "description": "Get All Memberships",
+        "produces": [
+          "text/json"
+        ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "statusCode": {
+                          "type": "number",
+                          "example": 200
+                        },
+                        "result": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number",
+                                "example": 1
+                              },
+                              "name": {
+                                "type": "string",
+                                "example": "Bronze"
+                              },
+                              "createdAt": {
+                                "type": "string",
+                                "example": "2023-11-28T15:59:06.000Z"
+                              },
+                              "updatedAt": {
+                                "type": "string",
+                                "example": "2023-11-28T15:59:06.000Z"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
+            "description": "OK"
           }
         }
       },
       "post": {
-        "description": "",
+        "tags": [
+          "Memberships"
+        ],
+        "description": "Add a Membership",
+        "produces": [
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "user-agent",
@@ -1077,37 +1139,113 @@
               "type": "object",
               "properties": {
                 "name": {
-                  "example": "any"
-                },
-                "from": {
-                  "example": "any"
-                },
-                "to": {
-                  "example": "any"
-                },
-                "discount": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Bronze"
                 }
               }
             }
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "201": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "statusCode": {
+                          "type": "number",
+                          "example": 201
+                        },
+                        "result": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "number",
+                              "example": 7
+                            },
+                            "name": {
+                              "type": "string",
+                              "example": "Bronze"
+                            },
+                            "updatedAt": {
+                              "type": "string",
+                              "example": "2023-11-30T07:37:23.428Z"
+                            },
+                            "createdAt": {
+                              "type": "string",
+                              "example": "2023-11-30T07:37:23.428Z"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
+            "description": "Created"
+          },
+          "400": {
+            "description": "All fields are required"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
     "/memberships/{membershipId}": {
       "delete": {
-        "description": "",
+        "tags": [
+          "Memberships"
+        ],
+        "description": "Delete a Membership",
+        "produces": [
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "membershipId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "in": {
+                  "type": "string",
+                  "example": "path"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Membership Id"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "membershipId"
+                },
+                "type": {
+                  "type": "string",
+                  "example": "number"
+                },
+                "example": {
+                  "type": "number",
+                  "example": 1
+                }
+              }
+            }
           },
           {
             "name": "user-agent",
@@ -1116,19 +1254,33 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "Membership deleted"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "The Membership is being used"
           }
         }
       },
       "put": {
-        "description": "",
+        "tags": [
+          "Memberships"
+        ],
+        "description": "Edit a Membership",
+        "produces": [
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "membershipId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "number",
+            "description": "Membership Id",
+            "example": 1
           },
           {
             "name": "body",
@@ -1137,24 +1289,52 @@
               "type": "object",
               "properties": {
                 "name": {
-                  "example": "any"
-                },
-                "from": {
-                  "example": "any"
-                },
-                "to": {
-                  "example": "any"
-                },
-                "discount": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "test1"
                 }
               }
             }
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "statusCode": {
+                          "type": "number",
+                          "example": 200
+                        },
+                        "result": {
+                          "type": "string",
+                          "example": "Membership updated"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "description": "Name is required"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }

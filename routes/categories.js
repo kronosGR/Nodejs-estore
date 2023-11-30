@@ -31,9 +31,6 @@ router.get('/', async (req, res, next) => {
     }
   }
 }
-
-
-
   */
   const categories = await categoryService.getAllCategories();
   return res.jsend.success({ data: { statusCode: 200, result: categories } });
