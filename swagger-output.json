@@ -1716,18 +1716,66 @@
     },
     "/checkout/now/{cartId}": {
       "post": {
-        "description": "",
+        "tags": [
+          "Checkout"
+        ],
+        "description": "Checkout a cart",
+        "produces": [
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "cartId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "number",
+            "description": "Cart Id",
+            "example": 1
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "statusCode": {
+                          "type": "number",
+                          "example": 200
+                        },
+                        "result": {
+                          "type": "string",
+                          "example": "Char has been checked-out"
+                        },
+                        "orderId": {
+                          "type": "string",
+                          "example": "7a48ebdc"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "description": "Cart is already checkout"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }

@@ -19,11 +19,35 @@ const orderService = new OrderService(db);
 const orderItemService = new OrderItemService(db);
 const membershipService = new MembershipService(db);
 
-// TODO
-
-// An endpoint is required for the Admin users to change the status of an order.
-
 router.post('/now/:cartId', async (req, res, next) => {
+  // #swagger.tags = ['Checkout']
+  // #swagger.description = "Checkout a cart"
+  // #swagger.produces = ['text/json']
+  /*  #swagger.parameters['cartId']={
+      in: 'path',
+      description: 'Cart Id',
+      name : 'cartId',
+      type: 'number',
+      example:1
+     } 
+     #swagger.responses[200] = {
+       schema:{
+              "status": "success",
+              "data": {
+                  "data": {
+                      "statusCode": 200,
+                      "result": "Char has been checked-out",
+                      "orderId": "7a48ebdc"
+                  }
+             }
+        }
+      }
+     #swagger.responses[400] = {
+      description: 'Cart is already checkout',
+    }
+     #swagger.responses[500] = {
+    }
+    */
   const cartId = req.params.cartId;
   const id = getIdFromToken(req);
   let totalPurchasedItems = 0;
