@@ -963,15 +963,93 @@
     },
     "/carts/": {
       "get": {
-        "description": "",
+        "tags": [
+          "Carts"
+        ],
+        "description": "Get All Carts",
+        "produces": [
+          "text/json"
+        ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "statusCode": {
+                          "type": "number",
+                          "example": 200
+                        },
+                        "result": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number",
+                                "example": 2
+                              },
+                              "total": {
+                                "type": "number",
+                                "example": 0
+                              },
+                              "isCheckedOut": {
+                                "type": "boolean",
+                                "example": false
+                              },
+                              "createdAt": {
+                                "type": "string",
+                                "example": "2023-11-30T04:49:29.000Z"
+                              },
+                              "updatedAt": {
+                                "type": "string",
+                                "example": "2023-11-30T04:49:29.000Z"
+                              },
+                              "UserId": {
+                                "type": "number",
+                                "example": 1
+                              },
+                              "CartItems": {
+                                "type": "array",
+                                "example": [],
+                                "items": {}
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not carts found"
           }
         }
       },
       "post": {
-        "description": "",
+        "tags": [
+          "Carts"
+        ],
+        "description": "Add new Cart",
+        "produces": [
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "body",
@@ -980,10 +1058,12 @@
               "type": "object",
               "properties": {
                 "total": {
-                  "example": "any"
+                  "type": "number",
+                  "example": 0
                 },
                 "isCheckedOut": {
-                  "example": "any"
+                  "type": "number",
+                  "example": 0
                 }
               }
             }
@@ -998,53 +1078,151 @@
     },
     "/carts/{cartId}": {
       "get": {
-        "description": "",
+        "tags": [
+          "Carts"
+        ],
+        "description": "Get Cart",
+        "produces": [
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "cartId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "number",
+            "description": "Cart Id",
+            "example": 1
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "statusCode": {
+                          "type": "number",
+                          "example": 200
+                        },
+                        "result": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number",
+                                "example": 2
+                              },
+                              "total": {
+                                "type": "number",
+                                "example": 0
+                              },
+                              "isCheckedOut": {
+                                "type": "boolean",
+                                "example": false
+                              },
+                              "createdAt": {
+                                "type": "string",
+                                "example": "2023-11-30T04:49:29.000Z"
+                              },
+                              "updatedAt": {
+                                "type": "string",
+                                "example": "2023-11-30T04:49:29.000Z"
+                              },
+                              "UserId": {
+                                "type": "number",
+                                "example": 1
+                              },
+                              "CartItems": {
+                                "type": "array",
+                                "example": [],
+                                "items": {}
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not cart found"
           }
         }
       },
       "delete": {
-        "description": "",
+        "tags": [
+          "Carts"
+        ],
+        "description": "Delete a Cart",
+        "produces": [
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "cartId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "number",
+            "description": "Cart Id",
+            "example": 1
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "Cart deleted"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "The cart is being used"
           }
         }
       }
     },
     "/carts/{cartId}/cartitem/{cartItemId}": {
       "put": {
-        "description": "",
+        "tags": [
+          "Carts"
+        ],
+        "description": "Update a Cart Item",
+        "produces": [
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "cartId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "number",
+            "description": "Cart Id",
+            "example": 1
           },
           {
             "name": "cartItemId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "number",
+            "description": "Cart Item Id",
+            "example": 1
           },
           {
             "name": "body",
@@ -1066,15 +1244,30 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "Item updated"
+          },
+          "400": {
+            "description": "All fields are required"
+          },
+          "403": {
+            "description": "The cart was checked out, you can update it"
+          },
+          "404": {
+            "description": "No cart found"
           }
         }
       }
     },
     "/carts/{cartId}/cartitem": {
       "post": {
-        "description": "",
+        "tags": [
+          "Carts"
+        ],
+        "description": "Add a Cart Item",
+        "produces": [
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "cartId",
@@ -1089,39 +1282,124 @@
               "type": "object",
               "properties": {
                 "productId": {
-                  "example": "any"
+                  "type": "number",
+                  "example": 2
                 },
                 "quantity": {
-                  "example": "any"
+                  "type": "number",
+                  "example": 1
                 },
                 "unitPrice": {
-                  "example": "any"
+                  "type": "number",
+                  "example": 69
                 }
               }
             }
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "Item(s) added to cart"
+          },
+          "400": {
+            "description": "All fields are required"
+          },
+          "403": {
+            "description": "The cart was checked out, you can update it"
+          },
+          "404": {
+            "description": "No cart found"
           }
         }
       }
     },
     "/carts/{cartId}/cartitems": {
       "get": {
-        "description": "",
+        "tags": [
+          "Carts"
+        ],
+        "description": "Get all Cart Items",
+        "produces": [
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "cartId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "number",
+            "description": "Cart Id",
+            "example": 1
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "statusCode": {
+                          "type": "number",
+                          "example": 200
+                        },
+                        "result": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number",
+                                "example": 4
+                              },
+                              "productId": {
+                                "type": "number",
+                                "example": 2
+                              },
+                              "quantity": {
+                                "type": "number",
+                                "example": 1
+                              },
+                              "unitPrice": {
+                                "type": "number",
+                                "example": 48.3
+                              },
+                              "createdAt": {
+                                "type": "string",
+                                "example": "2023-11-30T05:04:26.000Z"
+                              },
+                              "updatedAt": {
+                                "type": "string",
+                                "example": "2023-11-30T05:04:26.000Z"
+                              },
+                              "CartId": {
+                                "type": "number",
+                                "example": 2
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not cart found"
           }
         }
       }

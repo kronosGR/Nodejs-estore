@@ -19,6 +19,34 @@ const userService = new UserService(db);
 
 // get carts
 router.get('/', async (req, res, next) => {
+  // #swagger.tags = ['Carts']
+  // #swagger.description = "Get All Carts"
+  // #swagger.produces = ['text/json']
+  /*  #swagger.responses[200] = {
+       schema: {
+        "status": "success",
+        "data": {
+            "data": {
+                "statusCode": 200,
+                "result": [
+                    {
+                        "id": 2,
+                        "total": 0,
+                        "isCheckedOut": false,
+                        "createdAt": "2023-11-30T04:49:29.000Z",
+                        "updatedAt": "2023-11-30T04:49:29.000Z",
+                        "UserId": 1,
+                        "CartItems": []
+                    }
+                ]
+            }
+        }
+    }
+  }
+     #swagger.responses[404] = {
+      description: 'Not carts found',
+    }
+  */
   const id = getIdFromToken(req);
   const carts = await cartService.getCartsForUser(id);
   if (!carts) {
@@ -29,6 +57,41 @@ router.get('/', async (req, res, next) => {
 
 // get specific cart
 router.get('/:cartId', async (req, res, next) => {
+  // #swagger.tags = ['Carts']
+  // #swagger.description = "Get Cart"
+  // #swagger.produces = ['text/json']
+  /* #swagger.parameters['cartId']={
+      in: 'path',
+      description: 'Cart Id',
+      name : 'cartId',
+      type: 'number',
+      example:1
+     } 
+      #swagger.responses[200] = {
+       schema: {
+        "status": "success",
+        "data": {
+            "data": {
+                "statusCode": 200,
+                "result": [
+                    {
+                        "id": 2,
+                        "total": 0,
+                        "isCheckedOut": false,
+                        "createdAt": "2023-11-30T04:49:29.000Z",
+                        "updatedAt": "2023-11-30T04:49:29.000Z",
+                        "UserId": 1,
+                        "CartItems": []
+                    }
+                ]
+            }
+        }
+    }
+  }
+     #swagger.responses[404] = {
+      description: 'Not cart found',
+    }
+  */
   const cartId = req.params.cartId;
   const id = getIdFromToken(req);
   const cart = await cartService.getCartForUser(id, cartId);
@@ -40,6 +103,40 @@ router.get('/:cartId', async (req, res, next) => {
 
 // add new cart
 router.post('/', async (req, res, next) => {
+  // #swagger.tags = ['Carts']
+  // #swagger.description = "Add new Cart"
+  // #swagger.produces = ['text/json']
+  /* #swagger.parameters['body']={
+      in: 'body',
+       schema: {
+                "total": 0,
+                "isCheckedOut":0
+              }           
+     } 
+      #swagger.responses[201] = {
+       schema: {
+                "status": "success",
+                "data": {
+                    "data": {
+                        "statusCode": 201,
+                        "result": "Cart added",
+                        "data": {
+                            "id": 2,
+                            "total": 0,
+                            "UserId": 1,
+                            "isCheckedOut": false,
+                            "updatedAt": "2023-11-30T04:49:29.564Z",
+                            "createdAt": "2023-11-30T04:49:29.564Z"
+                        }
+                    }
+                }
+              }
+     #swagger.responses[400] = {
+      description: 'All fields are required',
+    }
+
+     #swagger.responses[500]
+  */
   let { total, isCheckedOut } = req.body;
   const id = getIdFromToken(req);
 
@@ -60,6 +157,26 @@ router.post('/', async (req, res, next) => {
 
 //delete cart
 router.delete('/:cartId', async (req, res, next) => {
+  // #swagger.tags = ['Carts']
+  // #swagger.description = "Delete a Cart"
+  // #swagger.produces = ['text/json']
+  /* #swagger.parameters['cartId']={
+      in: 'path',
+      description: 'Cart Id',
+      name : 'cartId',
+      type: 'number',
+      example:1
+     } 
+     #swagger.responses[200] = {
+      description: 'Cart deleted',
+    }
+     #swagger.responses[404] = {
+      description: 'Not found',
+    }
+     #swagger.responses[500] = {
+      description: 'The cart is being used',
+    }
+    */
   const cartId = req.params.cartId;
   try {
     const res = await cartService.deleteCart(cartId);
@@ -74,6 +191,36 @@ router.delete('/:cartId', async (req, res, next) => {
 
 //update item in cart
 router.put('/:cartId/cartitem/:cartItemId', async (req, res, next) => {
+  // #swagger.tags = ['Carts']
+  // #swagger.description = "Update a Cart Item"
+  // #swagger.produces = ['text/json']
+  /* #swagger.parameters['cartId']={
+      in: 'path',
+      description: 'Cart Id',
+      name : 'cartId',
+      type: 'number',
+      example:1
+     } 
+    #swagger.parameters['cartItemId']={
+        in: 'path',
+        description: 'Cart Item Id',
+        name : 'cartItemId',
+        type: 'number',
+        example:1
+     } 
+      #swagger.responses[200] = {
+          description: 'Item updated',
+        }
+        #swagger.responses[400] = {
+          description: 'All fields are required',
+        }
+        #swagger.responses[404] = {
+          description: 'No cart found',
+        }
+        #swagger.responses[403] = {
+          description: 'The cart was checked out, you can update it',
+      }
+     */
   const cartId = req.params.cartId;
   const cartItemId = req.params.cartItemId;
   const { productId, quantity, unitPrice } = req.body;
@@ -103,7 +250,7 @@ router.put('/:cartId/cartitem/:cartItemId', async (req, res, next) => {
   // update cart total
   const cart = await cartService.getCartForUser(id, cartId);
   if (!cart) {
-    return next(createHttpError(400, 'No cart found'));
+    return next(createHttpError(404, 'No cart found'));
   }
   const cartItems = cart.CartItems;
   let total = 0;
@@ -118,6 +265,30 @@ router.put('/:cartId/cartitem/:cartItemId', async (req, res, next) => {
 
 // add item to cart
 router.post('/:cartId/cartitem', async (req, res, next) => {
+  // #swagger.tags = ['Carts']
+  // #swagger.description = "Add a Cart Item"
+  // #swagger.produces = ['text/json']
+  /* #swagger.parameters['body']={
+      in: 'body',
+       schema: {
+          "productId": 2,
+          "quantity":1,
+          "unitPrice": 69
+        }
+     } 
+     #swagger.responses[200] = {
+      description: 'Item(s) added to cart'
+    }
+     #swagger.responses[400] = {
+      description: 'All fields are required',
+    }    
+     #swagger.responses[403] = {
+       description: 'The cart was checked out, you can update it',
+    }
+     #swagger.responses[404] = {
+      description: 'No cart found',
+    }    
+  */
   const cartId = req.params.cartId;
   const { productId, quantity, unitPrice } = req.body;
   const id = getIdFromToken(req);
@@ -161,7 +332,7 @@ router.post('/:cartId/cartitem', async (req, res, next) => {
   // update cart total
   const cart = await cartService.getCartForUser(id, cartId);
   if (!cart) {
-    return next(createHttpError(400, 'No cart found'));
+    return next(createHttpError(404, 'No cart found'));
   }
   const cartItems = cart.CartItems;
   let total = 0;
@@ -175,6 +346,42 @@ router.post('/:cartId/cartitem', async (req, res, next) => {
 });
 
 router.get('/:cartId/cartitems', async (req, res, next) => {
+  // #swagger.tags = ['Carts']
+  // #swagger.description = "Get all Cart Items"
+  // #swagger.produces = ['text/json']
+  /* #swagger.parameters['cartId']={
+      in: 'path',
+      description: 'Cart Id',
+      name : 'cartId',
+      type: 'number',
+      example:1
+     } 
+     #swagger.responses[200] = {
+      schema:{
+              "status": "success",
+              "data": {
+                  "data": {
+                      "statusCode": 200,
+                      "result": [
+                          {
+                              "id": 4,
+                              "productId": 2,
+                              "quantity": 1,
+                              "unitPrice": 48.3,
+                              "createdAt": "2023-11-30T05:04:26.000Z",
+                              "updatedAt": "2023-11-30T05:04:26.000Z",
+                              "CartId": 2
+                          }
+                      ]
+                  }
+              }
+          }
+    }
+     #swagger.responses[404] = {
+      description: 'Not cart found',
+    }
+
+ */
   const cartId = req.params.cartId;
   const cart = await cartItemService.getItemsFromCart(cartId);
   if (!cart) {
