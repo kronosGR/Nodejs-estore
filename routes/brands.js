@@ -12,7 +12,27 @@ router.get('/', async (req, res, next) => {
   // #swagger.tags = ['Brands']
   // #swagger.description = "Get All Brands"
   // #swagger.produces = ['text/json']
-  // #swagger.responses = [200]
+  /* #swagger.responses [200] = {
+    schema:{
+     "status": "success",
+     "data": {
+        "data": {
+            "statusCode": 200,
+            "result": [
+                {
+                    "id": 1,
+                    "name": "Apple",
+                    "createdAt": "2023-11-28T15:59:06.000Z",
+                    "updatedAt": "2023-11-28T15:59:06.000Z"
+                }
+            ]
+        }
+    }
+  }}
+
+
+
+  */
   const brands = await brandService.getAllBrands();
   return res.jsend.success({ data: { statusCode: 200, result: brands } });
 });
@@ -58,7 +78,18 @@ router.post('/', isAdmin, async (req, res, next) => {
   /* #swagger.parameters['body']={
       in: 'body',
        schema: {
-                $name: 'Apple',
+                 "status": "success",
+                "data": {
+                    "data": {
+                        "statusCode": 201,
+                        "result": {
+                            "id": 7,
+                            "name": "Apple",
+                            "updatedAt": "2023-11-30T07:37:23.428Z",
+                            "createdAt": "2023-11-30T07:37:23.428Z"
+                        }
+                    }
+                }
             }
      } 
      #swagger.responses[201] = {
@@ -104,7 +135,15 @@ router.put('/:brandId', isAdmin, async (req, res, next) => {
             }
      } 
      #swagger.responses[200] = {
-      description: 'Brand Updated'
+       schema:{
+              "status": "success",
+              "data": {
+                "data": {
+                    "statusCode": 200,
+                    "result": "Brand updated"
+                }
+          }
+      }
     }
      #swagger.responses[400] = {
       description: 'Name is required',

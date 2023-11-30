@@ -250,6 +250,56 @@
         ],
         "responses": {
           "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "statusCode": {
+                          "type": "number",
+                          "example": 200
+                        },
+                        "result": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number",
+                                "example": 1
+                              },
+                              "name": {
+                                "type": "string",
+                                "example": "Apple"
+                              },
+                              "createdAt": {
+                                "type": "string",
+                                "example": "2023-11-28T15:59:06.000Z"
+                              },
+                              "updatedAt": {
+                                "type": "string",
+                                "example": "2023-11-28T15:59:06.000Z"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
             "description": "OK"
           }
         }
@@ -274,14 +324,46 @@
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
+                "status": {
                   "type": "string",
-                  "example": "Apple"
+                  "example": "success"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "statusCode": {
+                          "type": "number",
+                          "example": 201
+                        },
+                        "result": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "number",
+                              "example": 7
+                            },
+                            "name": {
+                              "type": "string",
+                              "example": "Apple"
+                            },
+                            "updatedAt": {
+                              "type": "string",
+                              "example": "2023-11-30T07:37:23.428Z"
+                            },
+                            "createdAt": {
+                              "type": "string",
+                              "example": "2023-11-30T07:37:23.428Z"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
                 }
-              },
-              "required": [
-                "name"
-              ]
+              }
             }
           }
         ],
@@ -391,7 +473,37 @@
         ],
         "responses": {
           "200": {
-            "description": "Brand Updated"
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "statusCode": {
+                          "type": "number",
+                          "example": 200
+                        },
+                        "result": {
+                          "type": "string",
+                          "example": "Brand updated"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
+            "description": "OK"
           },
           "400": {
             "description": "Name is required"
@@ -404,15 +516,77 @@
     },
     "/categories/": {
       "get": {
-        "description": "",
+        "tags": [
+          "Categories"
+        ],
+        "description": "Get All Brands",
+        "produces": [
+          "text/json"
+        ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "statusCode": {
+                          "type": "number",
+                          "example": 200
+                        },
+                        "result": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number",
+                                "example": 1
+                              },
+                              "name": {
+                                "type": "string",
+                                "example": "Tablets"
+                              },
+                              "createdAt": {
+                                "type": "string",
+                                "example": "2023-11-28T15:59:06.000Z"
+                              },
+                              "updatedAt": {
+                                "type": "string",
+                                "example": "2023-11-28T15:59:06.000Z"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
+            "description": "OK"
           }
         }
       },
       "post": {
-        "description": "",
+        "tags": [
+          "Categories"
+        ],
+        "description": "Add a Category",
+        "produces": [
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "body",
@@ -421,28 +595,113 @@
               "type": "object",
               "properties": {
                 "name": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Tablet"
                 }
               }
             }
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "201": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "statusCode": {
+                          "type": "number",
+                          "example": 201
+                        },
+                        "result": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "number",
+                              "example": 7
+                            },
+                            "name": {
+                              "type": "string",
+                              "example": "test"
+                            },
+                            "updatedAt": {
+                              "type": "string",
+                              "example": "2023-11-30T07:37:23.428Z"
+                            },
+                            "createdAt": {
+                              "type": "string",
+                              "example": "2023-11-30T07:37:23.428Z"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
+            "description": "Created"
+          },
+          "400": {
+            "description": "Name is required"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
     "/categories/{categoryId}": {
       "delete": {
-        "description": "",
+        "tags": [
+          "Categories"
+        ],
+        "description": "Delete a category",
+        "produces": [
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "categoryId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "in": {
+                  "type": "string",
+                  "example": "path"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Category Id"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "categoryId"
+                },
+                "type": {
+                  "type": "string",
+                  "example": "number"
+                },
+                "example": {
+                  "type": "number",
+                  "example": 1
+                }
+              }
+            }
           },
           {
             "name": "user-agent",
@@ -451,19 +710,33 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "Category deleted"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "The Category is being used"
           }
         }
       },
       "put": {
-        "description": "",
+        "tags": [
+          "Categories"
+        ],
+        "description": "Edit a Category",
+        "produces": [
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "categoryId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "number",
+            "description": "Category Id",
+            "example": 1
           },
           {
             "name": "body",
@@ -472,15 +745,52 @@
               "type": "object",
               "properties": {
                 "name": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "test1"
                 }
               }
             }
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "statusCode": {
+                          "type": "number",
+                          "example": 200
+                        },
+                        "result": {
+                          "type": "string",
+                          "example": "Category updated"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "description": "Name is required"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
