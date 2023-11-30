@@ -81,7 +81,7 @@ router.post('/', async (req, res, next) => {
        schema: {
                 name: 'Tablet',
             }
-     } 
+     }
      #swagger.responses[201] = {
       schema: {
                 "status": "success",

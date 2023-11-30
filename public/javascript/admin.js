@@ -83,7 +83,7 @@ async function getProducts(whereClause) {
   const data = JSON.stringify(whereClause);
   $.ajax({
     type: 'POST',
-    url: API_PRODUCTS_URL,
+    url: API_PRODUCTS_URL + '/get',
     contentType: 'Application/json',
     data: data,
     dataType: 'json',

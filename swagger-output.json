@@ -1341,29 +1341,208 @@
     },
     "/products/{productId}": {
       "get": {
-        "description": "",
+        "tags": [
+          "Products"
+        ],
+        "description": "Get a product",
+        "produces": [
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "productId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "in": {
+                  "type": "string",
+                  "example": "path"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Product Id"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "productId"
+                },
+                "type": {
+                  "type": "string",
+                  "example": "number"
+                },
+                "example": {
+                  "type": "number",
+                  "example": 1
+                }
+              }
+            }
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "statusCode": {
+                          "type": "number",
+                          "example": 200
+                        },
+                        "result": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "number",
+                              "example": 2
+                            },
+                            "name": {
+                              "type": "string",
+                              "example": "Apple TV 2016"
+                            },
+                            "imgUrl": {
+                              "type": "string",
+                              "example": "http://143.42.108.232/products/product-apple-tv.png"
+                            },
+                            "description": {
+                              "type": "string",
+                              "example": "The future of television is here."
+                            },
+                            "price": {
+                              "type": "number",
+                              "example": 599
+                            },
+                            "quantity": {
+                              "type": "number",
+                              "example": 5
+                            },
+                            "isDeleted": {
+                              "type": "boolean",
+                              "example": false
+                            },
+                            "createdAt": {
+                              "type": "string",
+                              "example": "2023-11-28T15:59:06.000Z"
+                            },
+                            "updatedAt": {
+                              "type": "string",
+                              "example": "2023-11-30T07:48:26.000Z"
+                            },
+                            "BrandId": {
+                              "type": "number",
+                              "example": 1
+                            },
+                            "CategoryId": {
+                              "type": "number",
+                              "example": 2
+                            },
+                            "Category": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "number",
+                                  "example": 2
+                                },
+                                "name": {
+                                  "type": "string",
+                                  "example": "TVs"
+                                },
+                                "createdAt": {
+                                  "type": "string",
+                                  "example": "2023-11-28T15:59:06.000Z"
+                                },
+                                "updatedAt": {
+                                  "type": "string",
+                                  "example": "2023-11-28T15:59:06.000Z"
+                                }
+                              }
+                            },
+                            "Brand": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "number",
+                                  "example": 1
+                                },
+                                "name": {
+                                  "type": "string",
+                                  "example": "Apple"
+                                },
+                                "createdAt": {
+                                  "type": "string",
+                                  "example": "2023-11-28T15:59:06.000Z"
+                                },
+                                "updatedAt": {
+                                  "type": "string",
+                                  "example": "2023-11-28T15:59:06.000Z"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
+            "description": "OK"
           }
         }
       },
       "delete": {
-        "description": "",
+        "tags": [
+          "Products"
+        ],
+        "description": "Update a Product",
+        "produces": [
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "productId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "in": {
+                  "type": "string",
+                  "example": "path"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Product Id"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "productId"
+                },
+                "type": {
+                  "type": "string",
+                  "example": "number"
+                },
+                "example": {
+                  "type": "number",
+                  "example": 1
+                }
+              }
+            }
           },
           {
             "name": "user-agent",
@@ -1372,19 +1551,33 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "Product deleted"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "The Product is being used"
           }
         }
       },
       "put": {
-        "description": "",
+        "tags": [
+          "Products"
+        ],
+        "description": "Edit a Product",
+        "produces": [
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "productId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "number",
+            "description": "Product Id",
+            "example": 1
           },
           {
             "name": "user-agent",
@@ -1398,43 +1591,215 @@
               "type": "object",
               "properties": {
                 "name": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "iPhone"
                 },
                 "imgUrl": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "http://143.42.108.232/products/product-iphone.png"
                 },
                 "description": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "3D Touch. 12MP photos. 4K video."
                 },
                 "price": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "549"
                 },
                 "quantity": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "2"
                 },
                 "isDeleted": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "0"
                 },
-                "BrandId": {
-                  "example": "any"
+                "brandId": {
+                  "type": "string",
+                  "example": "1"
                 },
-                "CategoryId": {
-                  "example": "any"
+                "categoryId": {
+                  "type": "string",
+                  "example": "2"
                 }
               }
             }
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "statusCode": {
+                          "type": "number",
+                          "example": 200
+                        },
+                        "result": {
+                          "type": "string",
+                          "example": "Product updated"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "description": "All fields are required"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/products/get": {
+      "post": {
+        "tags": [
+          "Products"
+        ],
+        "description": "Get all or search products",
+        "produces": [
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "searchOptions": {
+                  "type": "object",
+                  "properties": {
+                    "category": {
+                      "type": "string",
+                      "example": "1"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "statusCode": {
+                          "type": "number",
+                          "example": 200
+                        },
+                        "result": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number",
+                                "example": 14
+                              },
+                              "name": {
+                                "type": "string",
+                                "example": "Samsung Galaxy Tab A7 Lite (T220) 8.7-inch 16GB Wi-Fi Tablet"
+                              },
+                              "imgUrl": {
+                                "type": "string",
+                                "example": "http://143.42.108.232/products/product-samsung-tab-A7.png"
+                              },
+                              "description": {
+                                "type": "string",
+                                "example": "Android table - perfect for kids"
+                              },
+                              "price": {
+                                "type": "number",
+                                "example": 20
+                              },
+                              "quantity": {
+                                "type": "number",
+                                "example": 8
+                              },
+                              "isDeleted": {
+                                "type": "number",
+                                "example": 0
+                              },
+                              "createdAt": {
+                                "type": "string",
+                                "example": "2023-11-28T15:59:06.000Z"
+                              },
+                              "updatedAt": {
+                                "type": "string",
+                                "example": "2023-11-28T15:59:06.000Z"
+                              },
+                              "BrandId": {
+                                "type": "number",
+                                "example": 2
+                              },
+                              "brandName": {
+                                "type": "string",
+                                "example": "Samsung"
+                              },
+                              "CategoryId": {
+                                "type": "number",
+                                "example": 1
+                              },
+                              "categoryName": {
+                                "type": "string",
+                                "example": "Tablets"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
+            "description": "OK"
           }
         }
       }
     },
     "/products/": {
       "post": {
-        "description": "",
+        "tags": [
+          "Products"
+        ],
+        "description": "Add a Product",
+        "produces": [
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "user-agent",
@@ -1448,36 +1813,80 @@
               "type": "object",
               "properties": {
                 "name": {
-                  "example": "any"
-                },
-                "description": {
-                  "example": "any"
-                },
-                "quantity": {
-                  "example": "any"
-                },
-                "price": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "iPhone"
                 },
                 "imgUrl": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "http://143.42.108.232/products/product-iphone.png"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "3D Touch. 12MP photos. 4K video."
+                },
+                "price": {
+                  "type": "string",
+                  "example": "549"
+                },
+                "quantity": {
+                  "type": "string",
+                  "example": "2"
                 },
                 "isDeleted": {
-                  "example": "any"
-                },
-                "categoryId": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "0"
                 },
                 "brandId": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "1"
+                },
+                "categoryId": {
+                  "type": "string",
+                  "example": "2"
                 }
               }
             }
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "statusCode": {
+                          "type": "number",
+                          "example": 201
+                        },
+                        "result": {
+                          "type": "string",
+                          "example": "Product added"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "description": "All fields required"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
@@ -2350,10 +2759,66 @@
     },
     "/orderstatuses/": {
       "get": {
-        "description": "",
+        "tags": [
+          "Order Status"
+        ],
+        "description": "Get All Order Statuses",
+        "produces": [
+          "text/json"
+        ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "statusCode": {
+                          "type": "number",
+                          "example": 200
+                        },
+                        "result": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number",
+                                "example": 3
+                              },
+                              "name": {
+                                "type": "string",
+                                "example": "Completed"
+                              },
+                              "createdAt": {
+                                "type": "string",
+                                "example": "2023-11-28T15:59:06.000Z"
+                              },
+                              "updatedAt": {
+                                "type": "string",
+                                "example": "2023-11-28T15:59:06.000Z"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
+            "description": "OK"
           }
         }
       }
