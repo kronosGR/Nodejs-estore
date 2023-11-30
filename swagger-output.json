@@ -29,10 +29,41 @@
     },
     "/init/": {
       "post": {
-        "description": "",
+        "tags": [
+          "Database Initialization"
+        ],
+        "description": "Adds categories, brands, Roles, Administrator user",
+        "produces": [
+          "text/json"
+        ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "statusCode": {
+                      "type": "number",
+                      "example": 201
+                    },
+                    "result": {
+                      "type": "string",
+                      "example": "Database Populated"
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
+            "description": "OK"
           }
         }
       }

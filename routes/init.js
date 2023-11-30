@@ -21,6 +21,19 @@ const categoryService = new CategoryService(db);
 const productService = new ProductService(db);
 const orderStatusService = new OrderStatusService(db);
 router.post('/', async function (req, res, next) {
+  // #swagger.tags = ['Database Initialization']
+  // #swagger.description = "Adds categories, brands, Roles, Administrator user"
+  // #swagger.produces = ['text/json']
+  /* #swagger.responses [200] = {
+    schema:{
+       "status": "success",
+       "data": {
+          "statusCode": 201,
+          "result": "Database Populated"
+      }
+    }
+  }
+  */
   try {
     // Populate roles table
     await roleService.addRole('Admin');
