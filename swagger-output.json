@@ -1073,15 +1073,204 @@
     },
     "/users/": {
       "get": {
-        "description": "",
+        "tags": [
+          "Users"
+        ],
+        "description": "Get All Users",
+        "produces": [
+          "text/json"
+        ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "statusCode": {
+                          "type": "number",
+                          "example": 200
+                        },
+                        "result": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number",
+                                "example": 1
+                              },
+                              "firstName": {
+                                "type": "string",
+                                "example": "Admin"
+                              },
+                              "lastName": {
+                                "type": "string",
+                                "example": "Support"
+                              },
+                              "username": {
+                                "type": "string",
+                                "example": "Admin"
+                              },
+                              "email": {
+                                "type": "string",
+                                "example": "admin@noroff.no"
+                              },
+                              "encryptedPassword": {
+                                "type": "object",
+                                "properties": {
+                                  "type": {
+                                    "type": "string",
+                                    "example": "Buffer"
+                                  },
+                                  "data": {
+                                    "type": "array",
+                                    "example": [
+                                      14,
+                                      229,
+                                      62,
+                                      0,
+                                      243
+                                    ],
+                                    "items": {
+                                      "type": "number"
+                                    }
+                                  }
+                                }
+                              },
+                              "salt": {
+                                "type": "object",
+                                "properties": {
+                                  "type": {
+                                    "type": "string",
+                                    "example": "Buffer"
+                                  },
+                                  "data": {
+                                    "type": "array",
+                                    "example": [
+                                      240,
+                                      116
+                                    ],
+                                    "items": {
+                                      "type": "number"
+                                    }
+                                  }
+                                }
+                              },
+                              "address": {
+                                "type": "string",
+                                "example": "Online"
+                              },
+                              "telephone": {
+                                "type": "string",
+                                "example": "911"
+                              },
+                              "itemsPurchased": {
+                                "type": "number",
+                                "example": 0
+                              },
+                              "createdAt": {
+                                "type": "string",
+                                "example": "2023-11-28T15:59:06.000Z"
+                              },
+                              "updatedAt": {
+                                "type": "string",
+                                "example": "2023-11-28T15:59:06.000Z"
+                              },
+                              "MembershipId": {
+                                "type": "number",
+                                "example": 3
+                              },
+                              "RoleId": {
+                                "type": "number",
+                                "example": 1
+                              },
+                              "Role": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "number",
+                                    "example": 1
+                                  },
+                                  "name": {
+                                    "type": "string",
+                                    "example": "Admin"
+                                  },
+                                  "createdAt": {
+                                    "type": "string",
+                                    "example": "2023-11-28T15:59:06.000Z"
+                                  },
+                                  "updatedAt": {
+                                    "type": "string",
+                                    "example": "2023-11-28T15:59:06.000Z"
+                                  }
+                                }
+                              },
+                              "Membership": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "number",
+                                    "example": 3
+                                  },
+                                  "name": {
+                                    "type": "string",
+                                    "example": "Gold"
+                                  },
+                                  "from": {
+                                    "type": "number",
+                                    "example": 30
+                                  },
+                                  "to": {
+                                    "type": "number",
+                                    "example": 999999999
+                                  },
+                                  "discount": {
+                                    "type": "number",
+                                    "example": 30
+                                  },
+                                  "createdAt": {
+                                    "type": "string",
+                                    "example": "2023-11-28T15:59:06.000Z"
+                                  },
+                                  "updatedAt": {
+                                    "type": "string",
+                                    "example": "2023-11-28T15:59:06.000Z"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
+            "description": "OK"
           }
         }
       },
       "post": {
-        "description": "",
+        "tags": [
+          "Users"
+        ],
+        "description": "Add a User",
+        "produces": [
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "body",
@@ -1090,55 +1279,105 @@
               "type": "object",
               "properties": {
                 "username": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "kronos"
                 },
                 "email": {
-                  "example": "any"
-                },
-                "password": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "geo.elgeo@gmail.com"
                 },
                 "firstName": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Kronos"
                 },
                 "lastName": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Olympians"
                 },
                 "itemsPurchased": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "0"
                 },
                 "address": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Olympus"
                 },
                 "telephone": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "999"
                 },
                 "MembershipId": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "3"
                 },
                 "RoleId": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "1"
                 }
               }
             }
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "statusCode": {
+                          "type": "number",
+                          "example": 200
+                        },
+                        "result": {
+                          "type": "string",
+                          "example": "User Added"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "description": "All fields are required"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
     "/users/{userId}": {
       "put": {
-        "description": "",
+        "tags": [
+          "Users"
+        ],
+        "description": "Edit a User",
+        "produces": [
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "userId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "number",
+            "description": "User Id",
+            "example": 1
           },
           {
             "name": "body",
@@ -1147,50 +1386,103 @@
               "type": "object",
               "properties": {
                 "username": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "kronos"
                 },
                 "email": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "geo.elgeo@gmail.com"
                 },
                 "firstName": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Kronos"
                 },
                 "lastName": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Olympians"
                 },
                 "itemsPurchased": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "0"
                 },
                 "address": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Olympus"
                 },
                 "telephone": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "999"
                 },
                 "MembershipId": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "3"
                 },
                 "RoleId": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "1"
                 }
               }
             }
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "statusCode": {
+                          "type": "number",
+                          "example": 200
+                        },
+                        "result": {
+                          "type": "string",
+                          "example": "User updated"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "description": "All fields are required"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
       "delete": {
-        "description": "",
+        "tags": [
+          "Users"
+        ],
+        "description": "Delete a User",
+        "produces": [
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "userId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "number",
+            "description": "User Id",
+            "example": 1
           },
           {
             "name": "user-agent",
@@ -1199,8 +1491,14 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "User deleted"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "The User is being used"
           }
         }
       }

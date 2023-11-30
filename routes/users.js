@@ -14,11 +14,105 @@ const router = express.Router();
 
 /* GET users listing. */
 router.get('/', async function (req, res, next) {
+  // #swagger.tags = ['Users']
+  // #swagger.description = "Get All Users"
+  // #swagger.produces = ['text/json']
+  /* #swagger.responses [200] = {
+    schema:{
+     "status": "success",
+     "data": {
+        "data": {
+            "statusCode": 200,
+            "result": [
+                {
+                    "id": 1,
+                    "firstName": "Admin",
+                    "lastName": "Support",
+                    "username": "Admin",
+                    "email": "admin@noroff.no",
+                    "encryptedPassword": {
+                        "type": "Buffer",
+                        "data": [ 14, 229, 62,0, 243]
+                    },
+                     "salt": {
+                        "type": "Buffer",
+                        "data": [240, 116 ]
+                    },
+                    "address": "Online",
+                    "telephone": "911",
+                    "itemsPurchased": 0,
+                    "createdAt": "2023-11-28T15:59:06.000Z",
+                    "updatedAt": "2023-11-28T15:59:06.000Z",
+                    "MembershipId": 3,
+                    "RoleId": 1,
+                    "Role": {
+                        "id": 1,
+                        "name": "Admin",
+                        "createdAt": "2023-11-28T15:59:06.000Z",
+                        "updatedAt": "2023-11-28T15:59:06.000Z"
+                    },
+                    "Membership": {
+                        "id": 3,
+                        "name": "Gold",
+                        "from": 30,
+                        "to": 999999999,
+                        "discount": 30,
+                        "createdAt": "2023-11-28T15:59:06.000Z",
+                        "updatedAt": "2023-11-28T15:59:06.000Z"
+                    }
+                },
+            ]
+        }
+    }
+  }
+}
+  */
   const users = await userService.getUsers();
   return res.jsend.success({ data: { statusCode: 200, result: users } });
 });
 
 router.put('/:userId', async (req, res, next) => {
+  // #swagger.tags = ['Users']
+  // #swagger.description = "Edit a User"
+  // #swagger.produces = ['text/json']
+  /*  #swagger.parameters['userId']={
+        in: 'path',
+        description: 'User Id',
+        name : 'userId',
+        type: 'number',
+        example:1
+     } 
+    #swagger.parameters['body']={
+      in: 'body',
+       schema: {
+                username : "kronos",
+                email : "geo.elgeo@gmail.com",
+                firstName : "Kronos",
+                lastName : "Olympians",
+                itemsPurchased : "0",
+                address : "Olympus",
+                telephone : "999",
+                MembershipId : "3",
+                RoleId : "1",
+            }
+     } 
+      #swagger.responses[200] = {
+      schema:{
+              "status": "success",
+              "data": {
+                "data": {
+                    "statusCode": 200,
+                    "result": "User updated"
+                }
+          }
+      }
+    }
+     #swagger.responses[400] = {
+      description: 'All fields are required',
+    }
+     #swagger.responses[500] = {
+    }
+  */
   const userId = req.params.userId;
   const {
     username,
@@ -68,6 +162,40 @@ router.put('/:userId', async (req, res, next) => {
 });
 
 router.post('/', isValidEmail, async (req, res, next) => {
+  // #swagger.tags = ['Users']
+  // #swagger.description = "Add a User"
+  // #swagger.produces = ['text/json']
+  /* #swagger.parameters['body']={
+      in: 'body',
+       schema: {
+                username : "kronos",
+                email : "geo.elgeo@gmail.com",
+                firstName : "Kronos",
+                lastName : "Olympians",
+                itemsPurchased : "0",
+                address : "Olympus",
+                telephone : "999",
+                MembershipId : "3",
+                RoleId : "1",
+            }
+     } 
+      #swagger.responses[200] = {
+      schema:{
+              "status": "success",
+              "data": {
+                "data": {
+                    "statusCode": 200,
+                    "result": "User Added"
+                }
+          }
+      }
+    }
+     #swagger.responses[400] = {
+      description: 'All fields are required',
+    }
+     #swagger.responses[500] = {
+    }
+  */
   const {
     username,
     email,
@@ -119,6 +247,27 @@ router.post('/', isValidEmail, async (req, res, next) => {
 });
 
 router.delete('/:userId', isAdmin, async (req, res, next) => {
+  // #swagger.tags = ['Users']
+  // #swagger.description = "Delete a User"
+  // #swagger.produces = ['text/json']
+  /* #swagger.parameters['userId']={
+        in: 'path',
+        description: 'User Id',
+        name : 'userId',
+        type: 'number',
+        example:1
+      } 
+     #swagger.responses[200] = {
+      description: 'User deleted',
+    }
+     #swagger.responses[404] = {
+      description: 'Not found',
+    }
+     #swagger.responses[500] = {
+      description: 'The User is being used',
+    }
+
+    */
   const userId = req.params.userId;
   try {
     const res = await userService.deleteUser(userId);
