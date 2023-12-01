@@ -232,7 +232,9 @@ router.post('/', isAdmin, isValidUrl, async (req, res, next) => {
     console.error(errorMsg);
     return next(createHttpError(500, errorMsg));
   }
-  return res.jsend.success({ data: { statusCode: 200, result: 'Product added' } });
+  return res.jsend.success({
+    data: { statusCode: 200, result: 'Product added', id: ret.id },
+  });
 });
 
 router.delete('/:productId', isAdmin, async (req, res, next) => {

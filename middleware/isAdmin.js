@@ -5,9 +5,15 @@ const isBrowser = require('../utils/isBrowser');
 require('dotenv').config();
 
 function isAdmin(req, res, next) {
-  const isWeb = isBrowser(req.headers['user-agent']);
+  let web;
+  let token;
+  token = req.cookies.token || '';
+  if (req.headers['user-agent']) {
+    isWeb = isBrowser(req.headers['user-agent']);
+  } else {
+    token = req.headers.authorization.substring(7, req.headers.authorization.length);
+  }
   let isValid = true;
-  const token = req.cookies.token || '';
   try {
     if (!token) isValid = false;
     const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);

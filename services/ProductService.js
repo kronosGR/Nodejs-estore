@@ -16,7 +16,7 @@ class ProductService {
     BrandId,
     CategoryId
   ) {
-    return this.Product.create({
+    const product = await this.Product.create({
       name,
       imgUrl,
       description,
@@ -26,6 +26,7 @@ class ProductService {
       BrandId,
       CategoryId,
     }).catch((e) => e);
+    return product;
   }
 
   async getProducts(whereClause) {

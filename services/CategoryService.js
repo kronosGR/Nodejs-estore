@@ -5,14 +5,15 @@ class CategoryService {
   }
 
   async addCategory(name) {
-    return this.Category.create({
+    const category = await this.Category.create({
       name: name,
     }).catch((e) => e);
+    return category;
   }
 
   async getCategoryIdByName(name) {
     const queryString = `SELECT id from categories where name='${name}'`;
-    return this.sequelize.query(queryString, {
+    return await this.sequelize.query(queryString, {
       type: this.sequelize.QueryTypes.SELECT,
     });
   }

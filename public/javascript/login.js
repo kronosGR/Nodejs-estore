@@ -1,5 +1,7 @@
-$(document).ready(function () {
+$(function () {
   hideSpinner();
+  $('#swagger-url').attr('href', API_URL + '/doc');
+
   $('#login-form').on('click', function (e) {
     e.preventDefault();
     const email = $('#email').val();

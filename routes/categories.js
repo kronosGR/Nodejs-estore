@@ -60,8 +60,9 @@ router.delete('/:categoryId', isAdmin, async (req, res, next) => {
     */
   const categoryId = req.params.categoryId;
   try {
-    const res = await categoryService.deleteCategory(categoryId);
-    if (res.name == 'SequelizeForeignKeyConstraintError') {
+    const ret = await categoryService.deleteCategory(categoryId);
+    console.log(ret);
+    if (ret.name == 'SequelizeForeignKeyConstraintError') {
       return next(createHttpError(500, 'The category is being used'));
     }
   } catch (e) {
@@ -70,7 +71,7 @@ router.delete('/:categoryId', isAdmin, async (req, res, next) => {
   res.jsend.success({ statusCode: 200, result: 'Category deleted' });
 });
 
-router.post('/', async (req, res, next) => {
+router.post('/', isAdmin, async (req, res, next) => {
   // #swagger.tags = ['Categories']
   // #swagger.description = "Add a Category"
   // #swagger.produces = ['text/json']
@@ -113,10 +114,10 @@ router.post('/', async (req, res, next) => {
     console.error(errorMsg);
     return next(createHttpError(500, errorMsg));
   }
-  return res.jsend.success({ data: { statusCode: 201, result: ret } });
+  return res.jsend.success({ data: { statusCode: 201, result: ret.id } });
 });
 
-router.put('/:categoryId', async (req, res, next) => {
+router.put('/:categoryId', isAdmin, async (req, res, next) => {
   // #swagger.tags = ['Categories']
   // #swagger.description = "Edit a Category"
   // #swagger.produces = ['text/json']
