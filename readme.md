@@ -1,24 +1,50 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/PSnw0W2M)
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-718a45dd9cf7e7f842a935f5ebbe5719a5e09af4491e668f4dbf3b35d5cca122.svg)](https://classroom.github.com/online_ide?assignment_repo_id=12964919&assignment_repo_type=AssignmentRepo)
+# Noroff Back-end Development Year 1
 
-![](http://143.42.108.232/pvt/Noroff-64.png)
-# Noroff
-## Back-end Development Year 1
-### EP - Course Assignment
+## Installation
 
-Startup code for Noroff back-end development 1 - EP course (e-commerce).
+```
+  npm install
+  npm start
 
-Instruction for the course assignment is in the LMS (Moodle) system of Noroff.
-[https://lms.noroff.no](https://lms.noroff.no)
+  // for unit test
+  npm test
+```
 
-![](http://143.42.108.232/pvt/important.png)
+## .env example
 
-You will not be able to make any submission after the deadline of the course assignment. Make sure to make all your commit **BEFORE** the deadline
+```
+HOST="localhost"
+ADMIN_USERNAME="estore"
+ADMIN_PASSWORD="123456"
+DATABASE_NAME="estore"
+DIALECT="mysql"
+DIALECTMODEL="mysql2"
+PORT="3000"
+DB_PORT="3306"
+TOKEN_SECRET=7b0eab1c341f9b65c6a499d2b291a8e61efaab450ecccc1f6cd1bbea2615b4cd1f078ac57430cd3197c1a7236626b2bd7b34385b993b2b46d0f73e72f5852242
+INIT_URL=http://143.42.108.232:8888/items/products
 
-![](http://143.42.108.232/pvt/help_small.png)
+```
 
-If you are unsure of any instructions for the course assignment, contact out to your teacher on **Microsoft Teams**.
+## Various Information
 
-**REMEMBER** Your Moodle LMS submission must have your repository link **AND** your Github username in the text file.
-
----
+- Node.js version - v18.18.0
+- Packages used
+  - bcrypt
+  - bootstrap
+  - cookie-parser
+  - ejs
+  - express
+  - express-session
+  - http-errors
+  - jest
+  - jquery
+  - jsend
+  - jsonwebtoken
+  - mysql
+  - mysql2
+  - sequelize
+  - supertest
+  - supertext
+  - swagger-autogen
+  - swagger-ui-express
