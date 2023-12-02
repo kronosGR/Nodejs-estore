@@ -10,6 +10,11 @@
   npm test
 ```
 
+// swagger API documentation http://localhost:3000/doc
+
+// Admin Panel Login Page
+http://localhost:3000/
+
 ## .env example
 
 ```
