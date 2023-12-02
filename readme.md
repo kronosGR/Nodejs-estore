@@ -1,10 +1,15 @@
 # Noroff Back-end Development Year 1
 
+Everything was done by myself and the only thing I looked for were the resources from the class and official documentation of the packages.
+
 ## Installation
 
 ```
   npm install
   npm start
+
+  // go to /init endpoint to add the initial dat to the database
+  http://localhost:3000/init
 
   // for unit test
   npm test
@@ -14,6 +19,14 @@
 
 // Admin Panel Login Page
 http://localhost:3000/
+
+// Credentials
+
+```
+Username: Admin
+Password: P@ssword2023
+Email: admin@noroff.no
+```
 
 ## .env example
 
