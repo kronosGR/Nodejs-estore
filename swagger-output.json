@@ -151,6 +151,13 @@
         "produces": [
           "text/html"
         ],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -166,6 +173,13 @@
         "description": "Admin Panel Brands",
         "produces": [
           "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
         ],
         "responses": {
           "200": {
@@ -183,6 +197,13 @@
         "produces": [
           "text/html"
         ],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -198,6 +219,13 @@
         "description": "Admin Panel Roles",
         "produces": [
           "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
         ],
         "responses": {
           "200": {
@@ -215,6 +243,13 @@
         "produces": [
           "text/html"
         ],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -230,6 +265,13 @@
         "description": "Admin Panel Users",
         "produces": [
           "text/html"
+        ],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
         ],
         "responses": {
           "200": {
@@ -247,6 +289,13 @@
         "produces": [
           "text/html"
         ],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -263,6 +312,13 @@
         "produces": [
           "text/html"
         ],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -278,6 +334,13 @@
         "description": "Get All Brands",
         "produces": [
           "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
         ],
         "responses": {
           "200": {
@@ -344,6 +407,11 @@
           "text/json"
         ],
         "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
           {
             "name": "user-agent",
             "in": "header",
@@ -446,6 +514,11 @@
             "example": 1
           },
           {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "user-agent",
             "in": "header",
             "type": "string"
@@ -479,6 +552,11 @@
             "type": "number",
             "description": "Brand Id",
             "example": 1
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           },
           {
             "name": "user-agent",
@@ -554,6 +632,13 @@
         "produces": [
           "text/json"
         ],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "schema": {
@@ -619,6 +704,16 @@
           "text/json"
         ],
         "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "user-agent",
+            "in": "header",
+            "type": "string"
+          },
           {
             "name": "body",
             "in": "body",
@@ -712,6 +807,11 @@
             "example": 1
           },
           {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "user-agent",
             "in": "header",
             "type": "string"
@@ -745,6 +845,16 @@
             "type": "number",
             "description": "Category Id",
             "example": 1
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "user-agent",
+            "in": "header",
+            "type": "string"
           },
           {
             "name": "body",
@@ -812,6 +922,13 @@
         "produces": [
           "text/json"
         ],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "schema": {
@@ -877,6 +994,11 @@
           "text/json"
         ],
         "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
           {
             "name": "user-agent",
             "in": "header",
@@ -975,6 +1097,11 @@
             "example": "1"
           },
           {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "user-agent",
             "in": "header",
             "type": "string"
@@ -1008,6 +1135,11 @@
             "type": "number",
             "description": "Role Id",
             "example": 1
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           },
           {
             "name": "user-agent",
@@ -1079,6 +1211,13 @@
         "description": "Get All Users",
         "produces": [
           "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
         ],
         "responses": {
           "200": {
@@ -1273,6 +1412,11 @@
         ],
         "parameters": [
           {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "body",
             "in": "body",
             "schema": {
@@ -1380,6 +1524,11 @@
             "example": 1
           },
           {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "body",
             "in": "body",
             "schema": {
@@ -1485,6 +1634,11 @@
             "example": 1
           },
           {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "user-agent",
             "in": "header",
             "type": "string"
@@ -1511,6 +1665,13 @@
         "description": "Get All Memberships",
         "produces": [
           "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
         ],
         "responses": {
           "200": {
@@ -1577,6 +1738,11 @@
           "text/json"
         ],
         "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
           {
             "name": "user-agent",
             "in": "header",
@@ -1675,6 +1841,11 @@
             "example": 1
           },
           {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "user-agent",
             "in": "header",
             "type": "string"
@@ -1708,6 +1879,11 @@
             "type": "number",
             "description": "Membership Id",
             "example": 1
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           },
           {
             "name": "body",
@@ -1783,6 +1959,11 @@
             "type": "number",
             "description": "Product Id",
             "example": 1
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -1926,6 +2107,11 @@
             "example": 1
           },
           {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "user-agent",
             "in": "header",
             "type": "string"
@@ -1959,6 +2145,11 @@
             "type": "number",
             "description": "Product Id",
             "example": 1
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           },
           {
             "name": "user-agent",
@@ -2060,6 +2251,11 @@
           "text/json"
         ],
         "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
           {
             "name": "body",
             "in": "body",
@@ -2183,6 +2379,11 @@
         ],
         "parameters": [
           {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "user-agent",
             "in": "header",
             "type": "string"
@@ -2281,6 +2482,13 @@
         "produces": [
           "text/json"
         ],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "schema": {
@@ -2363,6 +2571,11 @@
         ],
         "parameters": [
           {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "body",
             "in": "body",
             "schema": {
@@ -2404,6 +2617,11 @@
             "type": "number",
             "description": "Cart Id",
             "example": 1
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -2494,6 +2712,11 @@
             "type": "number",
             "description": "Cart Id",
             "example": 1
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -2534,6 +2757,11 @@
             "type": "number",
             "description": "Cart Item Id",
             "example": 1
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           },
           {
             "name": "body",
@@ -2587,6 +2815,11 @@
             "type": "number",
             "description": "Cart Id",
             "example": 1
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           },
           {
             "name": "body",
@@ -2643,6 +2876,11 @@
             "type": "number",
             "description": "Cart Id",
             "example": 1
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -2734,6 +2972,11 @@
             "type": "number",
             "description": "Cart Id",
             "example": 1
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -2793,6 +3036,11 @@
           "text/json"
         ],
         "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
           {
             "name": "user-agent",
             "in": "header",
@@ -2933,6 +3181,13 @@
         "description": "Get All Orders for a user",
         "produces": [
           "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
         ],
         "responses": {
           "200": {
@@ -3079,6 +3334,11 @@
             "example": 1
           },
           {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "user-agent",
             "in": "header",
             "type": "string"
@@ -3148,6 +3408,13 @@
         "description": "Get All Order Statuses",
         "produces": [
           "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
         ],
         "responses": {
           "200": {

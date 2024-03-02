@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000';
+const API_URL = 'http://estore.kronosgr.net';
 const API_LOGIN_URL = API_URL + '/auth/login';
 const API_BRAND_URL = API_URL + '/brands';
 const API_MEMBERSHIP_URL = API_URL + '/memberships';
